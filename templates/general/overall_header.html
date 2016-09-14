@@ -119,50 +119,12 @@
 	</script>
 	<!-- END switch_ticker_new -->
 
-	<script type="text/javascript">//<![CDATA[
-	$(document).ready(function(){
-		<!-- BEGIN switch_enable_pm_popup -->
-			pm = window.open('{U_PRIVATEMSGS_POPUP}', '_faprivmsg', 'HEIGHT=225,resizable=yes,WIDTH=400');
-			if(pm != null) { pm.focus(); }
-		<!-- END switch_enable_pm_popup -->
-		<!-- BEGIN switch_report_popup -->
-			report = window.open('{switch_report_popup.U_REPORT_POPUP}', '_phpbbreport', 'HEIGHT={switch_report_popup.S_HEIGHT},resizable=yes,scrollbars=no,WIDTH={switch_report_popup.S_WIDTH}');
-			if(report != null) { report.focus(); }
-		<!-- END switch_report_popup -->
-		<!-- BEGIN switch_ticker -->
-			$(document).ready(function() {
-				Ticker.start({
-					height : {switch_ticker.HEIGHT},
-					spacing : {switch_ticker.SPACING},
-					speed : {switch_ticker.SPEED},
-					direction : '{switch_ticker.DIRECTION}',
-					pause : {switch_ticker.STOP_TIME}
-				});
-			});
-		<!-- END switch_ticker -->
-	});
-
-	<!-- BEGIN switch_login_popup -->
-		var logInPopUpLeft, logInPopUpTop, logInPopUpWidth = {LOGIN_POPUP_WIDTH}, logInPopUpHeight = {LOGIN_POPUP_HEIGHT}, logInBackgroundResize = true, logInBackgroundClass = false;
-	<!-- END switch_login_popup -->
-
-	<!-- BEGIN switch_login_popup -->
-	$(document).ready( function() {
-		$(window).resize(function() {
-			var windowWidth = document.documentElement.clientWidth;
-			var popupWidth = $("#login_popup").width();
-			var mypopup = $("#login_popup");
-
-			$("#login_popup").css({
-			"left": windowWidth/2 - popupWidth/2
-				});
-		});
-	});
-	<!-- END switch_login_popup -->
-	//]]>
-	</script>
+ 
 	{GREETING_POPUP}
+ 
 	{HOSTING_JS}
+ 
+
 	<!-- BEGIN google_analytics_code -->
 	<script type="text/javascript">
 	//<![CDATA[
@@ -187,46 +149,70 @@
 </head>
 
 <body id="fa_edge" class="color-tertiary">
-<!-- BEGIN hitskin_preview -->
-<div id="hitskin_preview" style="display: block;">
-	<h1><img src="http://illiweb.com/fa/hitskin/hitskin_logo.png" alt="" /> <em>Hit</em>skin.com</h1>
-	<div class="content">
-		<p>
-			{hitskin_preview.L_THEME_SITE_PREVIEW}
-			<br />
-			<span>{hitskin_preview.U_INSTALL_THEME}<a href="http://{hitskin_preview.U_RETURN_THEME}">{hitskin_preview.L_RETURN_THEME}</a></span>
-		</p>
+ 
+ 
+  <header class="main-header">
 
-	</div>
-</div>
-<!-- END hitskin_preview -->
+  <div class="body_ribbon"></div>
+   <script src="" type="text/javascript"></script>	
+ 
+    <a href="/"><span class="logo" ></span> </a>
 
-<!-- BEGIN switch_login_popup -->
-<div id="login_popup" class="content-block" style="z-index: 10000 !important;">
-	<div class="title">{SITENAME}</div>
-  <div class="txt-content">{LOGIN_POPUP_MSG}</div>
-  <div id="login_popup_buttons">
-    <form action="{S_LOGIN_ACTION}" method="get">
-      <input type="submit" class="button1" value="{L_LOGIN}" />
-      <input type="button" class="button1" value="{L_REGISTER}" onclick="parent.location='{U_REGISTER}';" />
-      <input id="login_popup_close" type="button" class="button2" value="{L_DONT_DISPLAY_AGAIN}" />
-    </form>
-  </div>
+  <div class=" pictureContainer">
+      <a href="/">      <img id="kslogo" src="http://illiweb.com/fa/empty.gif">
+</a>
 </div>
-<!-- END switch_login_popup -->
+  
+<div class="countryicon"><a href="#menu"><span class="flag_kw flags"></span><br><font color="#FFFFFF">KW</font></a></div>
+  <form class="search-header" action="/search">
+  <input name="search_keywords"   type="text" placeholder="أدخل كلمات البحث . . ."  >
+  <button value="Go" type="submit">&#1576;&#1581;&#1579;</button>
+</form>   
+    <!-- BEGIN switch_user_logged_in -->
+
+     
+      <span class="Ahla-avatar"></span>
+      <div class="dropdown">
+      <input class="dropdown-toggle" type=" ">
+      <div class="dropdown-text">   <span class="Ahla-username"></span></div>
+      <ul class="dropdown-content">
+      <li>    <div class="ksuserlink"> </div></li>
+      <li><a  href="profile?mode=editprofile"><i class="fa fa-tasks ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610;&#1577;</a></li>
+      <li><a  href="profile?mode=editprofile&amp;page_profil=preferences"><i class="fa fa-cog ulfa" aria-hidden="true"></i>&#1575;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1581;&#1587;&#1575;&#1576;</a></li>
+      <li><a  href="privmsg?folder=inbox"><i class="fa fa-envelope ulfa" aria-hidden="true" ></i>&#1575;&#1604;&#1585;&#1587;&#1575;&#1574;&#1604; &#1575;&#1604;&#1582;&#1575;&#1589;&#1577;</a></li>
+      <li><a  href="search?search_id=favouritesearch"><i class="fa fa-star ulfa" aria-hidden="true"></i>&#1575;&#1604;&#1605;&#1601;&#1590;&#1604;&#1577;</a></li>
+      <li><a  href="profile?mode=editprofile&amp;page_profil=avatars"><i class="fa fa-camera-retro ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1589;&#1608;&#1585;&#1577; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610;&#1577;</a></li>
+      <li><a  href="profile?mode=editprofile&amp;page_profil=signature"><i class="fa fa-puzzle-piece ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1578;&#1608;&#1602;&#1610;&#1593;</a></li>
+      <li><a  href="login?logout=1"><i class="fa fa-power-off ulfa" aria-hidden="true"></i>&#1578;&#1587;&#1580;&#1610;&#1604; &#1575;&#1604;&#1582;&#1585;&#1608;&#1580;</a></li></ul></div>
+        
+             <a id="privmsg-menu" href="privmsg?folder=inbox">		
+     <i id="faedit" class="fa fa-envelope" aria-hidden="true"></i>
+     <div class="3thab"></div>
+     </a>
+     <!-- END switch_user_logged_in -->
+
+        <a href="#menu" id="toggle"><span></span></a>
+
+<div id="menu">
+  <ul class="ulmenu">
+
+    <li><a class="ulmenu" href="http://koutstore.com">&#1575;&#1604;&#1603;&#1608;&#1610;&#1578;<span class="flag_kw flags"></span></a></li>
+    <li><a class="ulmenu" href="http://eg.koutstore.com">&#1605;&#1589;&#1585;<span class="flag_eg flags"></span></a></li>
+    <li><a class="ulmenu" href="http://ps.koutstore.com">&#1601;&#1604;&#1587;&#1591;&#1610;&#1606;<span class="flag_ps flags"></span></a></li>
+    <li><a class="ulmenu" href="http://dz.koutstore.com">&#1575;&#1604;&#1580;&#1586;&#1575;&#1574;&#1585;<span class="flag_dz flags"></span></a></li>
+    <li><a class="ulmenu" href="http://us.koutstore.com">usa<span class="flag_us flags"></span></a></li>
+  </ul>
+ </div>
+ 	<script src="http://www.koutstore.com/11508.js" type="text/javascript"></script>
+ 
+</header>
+	
+
 <a id="top" name="top" accesskey="t"></a>
 {JAVASCRIPT}
 
 	<div id="page-header" class="color-primary">
-		<div id="logo-desc">
-			<a href="{U_INDEX}" id="logo"><img src="{LOGO}" alt="{L_INDEX}" /></a>
-			<!-- BEGIN switch_h1 -->
-			<div id="site-title">{switch_h1.MAIN_SITENAME}</div>
-			<!-- END switch_h1 -->
-			<!-- BEGIN switch_desc -->
-			<p id="site-desc">{switch_desc.SITE_DESCRIPTION}</p>
-			<!-- END switch_desc -->
-		</div>
+ 
 
     <div id="navbar" class="color-secondary">
 			<ul class="linklist navlinks{NAVBAR_BORDERLESS}">
@@ -239,15 +225,7 @@
 
 	<div id="page-body">
 
-	  <!-- BEGIN switch_search_box -->
-	  <div id="main-search" class="search-box">
-			<form method="get" action="{ACTION_SEARCH}" class="search-form" id="search">
-				<input type="text" name="search_keywords" id="keywords" maxlength="128" class="search-keywords" value="{L_SEARCH}..." onclick="if (this.value == '{L_SEARCH}...') this.value = '';" onblur="if (this.value == '') this.value = '{L_SEARCH}...';" />
-				{JS_SESSION_ID_INPUT}
-        <input class="fa search-button" type="submit" value="&#xf002;" />
-			</form>
-		</div>
-	  <!-- END switch_search_box -->
+ 
     <div class="clear"></div>
 
 		<!-- BEGIN switch_ticker_new -->
