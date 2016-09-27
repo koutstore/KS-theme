@@ -417,3 +417,12 @@
 	height: 24px;
     display: inline-block;
 }
+
+	.add 
+{
+		background: url('http://i35.servimg.com/u/f35/19/14/82/76/ks_css19.png') no-repeat -302px -6px ;
+		width: 80px;
+		height: 22px;
+	        float:right;
+
+}
