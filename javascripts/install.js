@@ -2890,7 +2890,7 @@ FAE.step = [
     type : 'POST',
      url : 'part=themes&sub=logos&mode=depart&page=general&mode=general&extended_admin=1',
     data : {
-      i_logo : FAE.eGIF, //not sure
+      i_logo : 'http://i97.servimg.com/u/f97/19/14/82/76/image110.png',
       i_background : FAE.eGIF,
       i_back_title : FAE.eGIF,
       i_back_catg : FAE.eGIF,
