@@ -1,55 +1,4 @@
-     <script type="text/javascript">
-//<![CDATA[
-var multiquote_img_off = '{JS_MULTIQUOTE_IMG_OFF}', multiquote_img_on = '{JS_MULTIQUOTE_IMG_ON}', _atr = '{JS_DIR}addthis/', _ati = '{PATH_IMG_FA}addthis/'{ADDTHIS_LANG}, addthis_localize = { share_caption: "{L_SHARE_CAPTION}", email: "{L_EMAIL}", email_caption: "{L_EMAIL_CAPTION}", favorites: "{L_SHARE_BOOKMARKS}", print: "{L_PRINT}", more: "{L_MORE}" };
-
-
-$(function(){
-
-    if(typeof(_atc) == "undefined") {
-        _atc = {  };
-    }
-
-    _atc.cwait = 0;
-    $('.addthis_button').mouseup(function(){
-        if ($('#at15s').css('display') == 'block') {
-            addthis_close();
-        }
-    });
-});
-
-var hiddenMsgLabel = { visible:'{JS_HIDE_HIDDEN_MESSAGE}', hidden:'{JS_SHOW_HIDDEN_MESSAGE}' };
-showHiddenMessage = function(id)
-{
-    try
-    {
-        var regId = parseInt(id, 10);
-        if( isNaN(regId) ) { regId = 0; }
-
-        if( regId > 0)
-        {
-            $('.post--' + id).toggle(0, function()
-			{
-				if( $(this).is(":visible") )
-				{
-					$('#hidden-title--' + id).html(hiddenMsgLabel.visible);
-				}
-				else
-				{
-					$('#hidden-title--' + id).html(hiddenMsgLabel.hidden);
-				}
-			});
-        }
-    }
-    catch(e) { }
-
-	return false;
-};
-
-//]]>
-</script>
-<style> 
-  .module_inner {display: none;}
-</style>
+<style>.module_inner {display: none;}</style>
 <h1 class="page-title">
 	<a href="{TOPIC_URL}">{TOPIC_TITLE}</a>
 </h1>
@@ -86,10 +35,10 @@ showHiddenMessage = function(id)
 
 		<ul class="btn-share clearfix">
 
-			<li><a title="شارك" href="#" class="button share fa fa-share-alt"></a></li>
-			<li><a href="https://twitter.com/landsurveyorsu" class="button twitter fa fa-twitter" target="_blank"></a></li>
-			<li><a href="http://www.facebook.com/share.php?u=" class="button facebook fa fa-facebook" target="_blank"></a></li>
-			<li><a href="https://plus.google.com/u/0/+Landsurveyorsunited/" class="button google fa fa-google-plus" target="_blank"></a></li>
+<li><a title="شارك" href="#" class="button share fa fa-share-alt"></a></li>
+<li><script >document.write('<a class="button twitter fa fa-twitter share-btn" href="https://twitter.com/intent/tweet?hashtags=koutstore&original_referer=http://' + window.location.host + '{TOPIC_URL}&ref_src=twsrc%5Etfw&text={TOPIC_TITLE}&tw_p=tweetbutton&url=http://' + window.location.host + '{TOPIC_URL}&via=koutstore"></a>');</script></li>
+<li><script>document.write('<a class="button facebook fa fa-facebook share-btn" href="http://www.facebook.com/share.php?u=' + window.location.host + '{TOPIC_URL}"></a>');</script></li>
+<li><script>document.write('<a class="button google fa fa-google-plus share-btn" href="https://plus.google.com/share?url=' + window.location.host + '{TOPIC_URL}"></a>');</script></li>
 
 		</ul>
 
@@ -112,7 +61,8 @@ showHiddenMessage = function(id)
  
 </aside>
  
- 
+ 			<div class="topic-container">
+
 <!-- BEGIN postrow -->
 	<!-- BEGIN hidden -->
 		<div class="content-block post {postrow.hidden.ROW_COUNT}">
@@ -241,6 +191,7 @@ showHiddenMessage = function(id)
 		<!-- END first_post_br -->
 	<!-- END displayed -->
 <!-- END postrow -->
+			</div>
 
 <a name="bottomtitle"></a>
 
@@ -258,33 +209,7 @@ showHiddenMessage = function(id)
 <a name="quickreply"></a>
 {QUICK_REPLY_FORM}
 <!-- END switch_user_logged_in -->
-
-<!-- BEGIN switch_user_logged_out -->
-<div id="logged_out_reply" class="content-block">
-  <h2 class="lor_maintitle">Create an account or log in to leave a reply</h2>
-  <p class="lor_maindesc">You need to be a member in order to leave a reply.</p>
-
-  <div class="lor_row">
-    <div class="lor_panel">
-      <h3 class="lor_subtitle">Create an account</h3>
-      <p class="lor_subdesc">Join our community by creating a new account. It's easy!</p>
-      <br/>
-      <a href="/register" class="button1">Create a new account</a>
-    </div>
-
-    <div class="lor_panel">
-      <h3 class="lor_subtitle">Log in</h3>
-      <p class="lor_subdesc">Already have an account? No problem, log in here.</p>
-      <br/>
-      <a href="/login" class="button1">Log in</a>
-    </div>
-  </div>
-</div>
-<!-- END switch_user_logged_out -->
-
-
- 
-
+  
 <div class="topic-actions">
  
  
