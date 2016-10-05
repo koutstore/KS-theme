@@ -2872,7 +2872,66 @@ FAE.step = [
         tpl : 1010,
      mobile : 1,
   },
+    
+      {
+    info : 'Installing template index_box.html (mobile)',
+    type : 'POST',
+     url : 'part=themes&sub=templates&mode=edit_main&extended_admin=1',
+    data : {
+             t : 1007,
+             l : 'mobile',
+      tpl_name : 'index_box',
+        submit : 'Save'
+    }
+  },
 
+
+  {
+       info : 'Publishing template index_box.html (mobile)',
+       type : 'PUBLISH',
+        tpl : 1007,
+     mobile : 1,
+  },
+
+          {
+    info : 'Installing template index_box.html (mobile)',
+    type : 'POST',
+     url : 'part=themes&sub=templates&mode=edit_main&extended_admin=1',
+    data : {
+             t : 1007,
+             l : 'mobile',
+      tpl_name : 'index_box',
+        submit : 'Save'
+    }
+  },
+
+
+  {
+       info : 'Publishing template index_box.html (mobile)',
+       type : 'PUBLISH',
+        tpl : 1007,
+     mobile : 1,
+  },
+    
+          {
+    info : 'Installing template overall_footer.html (mobile)',
+    type : 'POST',
+     url : 'part=themes&sub=templates&mode=edit_main&extended_admin=1',
+    data : {
+             t : 1009,
+             l : 'mobile',
+      tpl_name : 'index_box',
+        submit : 'Save'
+    }
+  },
+
+
+  {
+       info : 'Publishing template overall_footer.html (mobile)',
+       type : 'PUBLISH',
+        tpl : 1009,
+     mobile : 1,
+  },
 
   {
      info : 'Enabling custom templates',
