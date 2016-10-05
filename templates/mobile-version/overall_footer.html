@@ -1,0 +1,178 @@
+<!-- BEGIN html_validation -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+
+    <div>
+        <main>
+<!-- END html_validation -->
+        {PROTECT_FOOTER}
+        <div class="application_footer_spacer"></div>
+        </main>
+    </div>
+<script type="text/javascript">
+//<![CDATA[
+    fa_endpage();
+//]]>
+</script>
+<script src="http://illiweb.com/rs3/29/frm/jquery/touch-swipe/jquery.touchSwipe.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+            $(document).ready(function(){
+                $(".forum-section").each(function() {
+                    var forumName = $(this).find("h3");
+                    var statsWidth = $(this).find(".forum-statistics").outerWidth();
+                    var forumNamePadding = statsWidth + 8;
+
+                    if ($("body").css("direction").toLowerCase() == "rtl") {
+                        $(forumName).css("padding-left", forumNamePadding); 
+                    } else {
+                        $(forumName).css("padding-right", forumNamePadding); 
+                    }
+                });
+
+                $(".forum-icon, .post-icon").each(function() {
+                    var image = $(this).find("img");
+
+                    image.error(function() {
+                        $(this).parent('a').remove();
+                        $(this).remove();
+                    });
+                });
+
+                setTimeout(floatingButtonPosition, 2000);
+                alterMenuIcons();
+            });
+
+            $(function() {
+                var backLink = $('.mobile_prev_button.block').attr('href');
+                var nextLink = $('.mobile_next_button.block').attr('href');
+
+                if (backLink || nextLink) {
+
+                    if (backLink) {
+                        var swipeBackArrow = $('<div>', {
+                            id: 'swipe_back_arrow',
+                            css: {
+                                opacity: 0
+                            },
+                            text: ''
+                        });
+                        $('body').append(swipeBackArrow);
+                        var swipeBackArrow = $('#swipe_back_arrow');
+                    }
+
+                    if (nextLink) {
+                        var swipeNextArrow = $('<div>', {
+                            id: 'swipe_next_arrow',
+                            css: {
+                                opacity: 0
+                            },
+                            text: ''
+                        });
+                        $('body').append(swipeNextArrow);
+                        var swipeNextArrow = $('#swipe_next_arrow');
+                    }
+
+                    $(window).swipe( {
+                        swipeStatus:function(event, phase, direction, distance)
+                        {
+                            var arrowPos = 0;
+                            var arrowOpacity = 0;
+
+                            if (backLink) {
+                                swipeBackArrow.removeAttr('style');
+                            }
+
+                            if (nextLink) {
+                                swipeNextArrow.removeAttr('style');
+                            }
+
+                            if ($("body").css("direction").toLowerCase() == "rtl") {
+                                if ((phase=="move") && (direction=="right") && nextLink) {
+                                    var arrowPos = (distance / 200) * 40;
+                                    var arrowOpacity = distance / 200;
+                                    swipeNextArrow.css('left', arrowPos);
+                                    swipeNextArrow.css('opacity', arrowOpacity);
+                                    destLink = nextLink;
+                                } else if ((phase=="move") && (direction=="left") && backLink) {
+                                    var arrowPos = (distance / 200) * 40;
+                                    var arrowOpacity = distance / 200;
+                                    swipeBackArrow.css('right', arrowPos);
+                                    swipeBackArrow.css('opacity', arrowOpacity);
+                                    destLink = backLink;
+                                } else if ((phase=="end") && (direction=="right") && nextLink) {
+                                    swipeNextArrow.css('left', arrowPos);
+                                    swipeNextArrow.css('opacity', 0);
+                                    window.location.href = destLink;
+                                } else if ((phase=="end") && (direction=="left") && backLink) {
+                                    swipeBackArrow.css('right', arrowPos);
+                                    swipeBackArrow.css('opacity', 0);
+                                    window.location.href = destLink;
+                                }
+                            } else {
+                                if ((phase=="move") && (direction=="left") && nextLink) {
+                                    var arrowPos = (distance / 200) * 40;
+                                    var arrowOpacity = distance / 200;
+                                    swipeNextArrow.css('right', arrowPos);
+                                    swipeNextArrow.css('opacity', arrowOpacity);
+                                    destLink = nextLink;
+                                } else if ((phase=="move") && (direction=="right") && backLink) {
+                                    var arrowPos = (distance / 200) * 40;
+                                    var arrowOpacity = distance / 200;
+                                    swipeBackArrow.css('left', arrowPos);
+                                    swipeBackArrow.css('opacity', arrowOpacity);
+                                    destLink = backLink;
+                                } else if ((phase=="end") && (direction=="left") && nextLink) {
+                                    swipeNextArrow.css('right', arrowPos);
+                                    swipeNextArrow.css('opacity', 0);
+                                    window.location.href = destLink;
+                                } else if ((phase=="end") && (direction=="right") && backLink) {
+                                    swipeBackArrow.css('left', arrowPos);
+                                    swipeBackArrow.css('opacity', 0);
+                                    window.location.href = destLink;
+                                }
+                            }
+                        },
+                        triggerOnTouchEnd: true,
+                        triggerOnTouchLeave: false,
+                        threshold: 200,
+                        allowPageScroll: "vertical"
+                    });
+                }
+            });
+
+            function floatingButtonPosition() {
+                if ($("#at-share-dock").length) {
+                    $(".btn-floating").css("bottom", "60px");
+                }; 
+            };
+
+            function alterMenuIcons() {
+                $('#mNavbar').find('.navBtnIcon').each(function() {
+                    switch ($(this).css('backgroundPosition')) {
+                        case '-32px 0px':
+                            $(this).html('<i class="material-icons">&#xE88A;</i>');
+                            break;
+                        case '-64px 0px':
+                            $(this).html('<i class="material-icons">&#xE8AC;</i>');
+                            break;
+                        case '0px 0px':
+                            $(this).html('<i class="material-icons">&#xE30C;</i>');
+                            break;
+                        case '-96px 0px':
+                            $(this).html('<i class="material-icons">&#xE8AC;</i>');
+                            break;
+                    }
+                });
+            };
+</script>
+    <footer style="font-size:12px">
+	<div style="padding-top:15px;">
+      الإدارة غير مسئولة عن أي اتفاق تجاري أو تعاوني بين الأعضاء فعلى كل شخص تحمل المسئولية تجاه مايقوم به من بيع أو شراء أو اتفاق أو اعطاء معلومات
+      </div>
+	<div style="direction: ltr;text-align: center;padding:10px 0 10px 0 ;">© 2016 KoutStore, Co.</div>
+      <a href="/">
+<img style="width:100px;height:44px;border:0" src="http://s01.arab.sh/i/00083/lprwizhhmv1y.png" alt="koutstore.com"></a>
+</footer>
+</body>
+</html>
