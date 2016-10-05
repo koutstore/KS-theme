@@ -797,7 +797,7 @@ $(function() {
               jQuery('.sceditor-resize-cover').hide();
            }).fail(function() {
               oFE_msgID.html(sFE_oldMsg);
-              alert('Attention!\n\n An error occurred while requesting the edition of the post, wait 10 seconds and try editing again!');
+              alert('تنبيه!\n\n حدث خطأ في ارسال طلب التعديل , يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى !');
            });
            jQuery('html,body').animate({
               scrollTop: jQuery('#p' + post_ID).offset().top
@@ -851,7 +851,7 @@ $(function() {
               /* */
            }).fail(function() {
               oFE_msgID.html(sFE_oldMsg);
-              alert('Attention!\n\n There was an error saving editing the post, wait 10 seconds and try editing again!');
+              alert('تنبيه !\n\n حدث خطأ اثناء حفظ التعديل , يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى');
            });
            jQuery('html,body').animate({
               scrollTop: jQuery('#p' + post_ID).offset().top
@@ -1191,7 +1191,7 @@ $(function() {
         var href = $('a[href*="mode=reply"]').attr("href");
         var value = $("#text_editor_textarea").sceditor("instance").val().replace(/\s/g, '').length;
         if(10 <= value){
-        $('<span class="lreply" style="color: red;font-weight: bold; text-transform: uppercase;"><br>يتم الارسال ش...</span>').appendTo("#quick_reply div:last");
+        $('<span class="lreply" style="color: red;font-weight: bold; text-transform: uppercase;"><br>يتم الارسال ...</span>').appendTo("#quick_reply div:last");
         $("#text_editor_textarea").val($("#text_editor_textarea").sceditor('instance').val());
         $.post('/post', $('#quick_reply').serialize() + '&post=Send', function(t) {
          
