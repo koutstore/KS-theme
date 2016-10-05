@@ -1,11 +1,72 @@
-<script src="{JS_DIR}extendedview.js" type="text/javascript"></script>
+    <script src="{JS_DIR}extendedview.js" type="text/javascript"></script>
 <!-- BEGIN switch_head -->
 <!-- END switch_head -->
 
 {ERROR_BOX}
 
+<!-- BEGIN switch_not_privmsg -->
+<table align="center" border="0" style="    padding: 10px;
+    background-color: #FFF;
+    position: relative;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);" width="90%">
+	<tr>
+		<td valign="top" width="147">
+		<img border="0" src="http://i18.servimg.com/u/f18/13/76/93/58/dialog10.png" width="128" height="128" align="right"></td>
+		<td width="90%">
+		<p align="right"><b><font color="#FF0000">نصائح لجعل اعلانك 
+		اكثر جاذبية و استحسان راي الزوار و الاعضاء بخصوص ما تعلن عنه</font><font size="5">
+		</font></b><font size="4">&nbsp;</font></p>
+		<div align="right">
+			<ul style=" color: #FF0000;">
+				<li><font color="#000000" size="2">مراعاة وضع عنوان الاعلان بعناية ، فضع له عنوان واضح يدل على محتواه&nbsp; .
+				</font>
+		</li>
+			</ul>
+		<div align="right">
+			<ul style=" color: #FF0000;">
+				<li><font color="#000000" size="2">العنصر البصري للاعلان هو الأساس الناجح لاي اعلان لذلك ، قم بتزويد اعلانك بصور اصلية للمنتج المراد بيعه .</font></li>
+					</ul>
+					<div align="right">
+						<ul style=" color: #FF0000;">
+							<li><font color="#000000" size="2">قم بتزويد الاعلان بكافة تفاصيل المنتج ، هذا يؤدي لمزيد من الثقة بك من قبل المشترين .</font></li>
+						</ul>
+						<div align="right">
+							<ul style=" color: #FF0000;">
+								<li><font color="#000000" size="2">تجنب اللغات و اللهجات العامية والأخطاء الإملائية .
+								</font>
+							</li>
+							</ul>
+		<div align="right">
+			<ul style=" color: #FF0000;">
+				<li><font color="#000000" size="2">اذا تم الانتهاء من بيع منتجك يرجى اعلامنا بذلك في نهاية الاعلان لاغلاق الموضوع<span lang="ar-eg">&nbsp; 
+		و ختم الاعلان بختم (تم البيع)</span>&nbsp; .
+		</font>
+		</li>
+								</ul>
+		<div align="right">
+			<ul style=" color: #FF0000;">
+				<li><font color="#000000" size="2">تجنب انشاء اعلان عن طريق النسخ و اللصق من مواقع اخرى 
+		(قد تؤدي لظهور أكواد التنسيق مما يشوه من شكل الاعلان و الاشراف له الحق 
+		في حذف الاعلان ).</font></li>
+									</ul>
+									<div align="right">
+										<ul style=" color: #FF0000;">
+											<li><font color="#000000" size="2">تجنب اضافة روابط خارجية لاية مواقع اخرى في اعلانك . 
+											</font> 
+											</li>
+										</ul>
+									<div align="right">
+										<ul style=" color: #FF0000;">
+											<li><font size="2" color="#000000">لا تدخل اي معلومات بنكية خاصة بحسابك .</font><font size="2">
+											</font> 
+											</li>
+										</ul>
+</td>
+	</tr>
+</table>
+<!-- END switch_not_privmsg -->
 <form action="{S_POST_ACTION}" method="post" name="post" enctype="multipart/form-data">
-    <h1 class="page-title">{L_POST_A}</h1>
+ 
     {POST_PREVIEW_BOX}
 
     <!-- BEGIN switch_forum_rules -->
@@ -84,20 +145,26 @@
             <!-- END switch_privmsg -->
 
             <!-- BEGIN switch_icon_checkbox -->
+
             <dl>
+ 
                 <dt><label>{L_ICON_TITLE}</label></dt>
                 <dd>
                     <!-- BEGIN row -->
                     <!-- BEGIN cell -->
+
                         <label><input type="radio" name="post_icon" value="{switch_icon_checkbox.row.cell.ICON_ID}" {switch_icon_checkbox.row.cell.ICON_CHECKED} id="post_icon_{switch_icon_checkbox.row.cell.ICON_ID}" />&nbsp;<span onclick="document.forms['post'].post_icon_{switch_icon_checkbox.row.cell.ICON_ID}.checked=true">{switch_icon_checkbox.row.cell.ICON_IMG}</span></label> &nbsp;
-                    <!-- END cell -->
+
+                  <!-- END cell -->
                     <!-- END row -->
                 </dd>
+ 
             </dl>
+
             <!-- END switch_icon_checkbox -->
 
             <!-- BEGIN switch_subject -->
-            <dl>
+            <dl class="hide-topic">
                 <dt><label>{L_SUBJECT}</label></dt>
                 <dd>
                     <input class="inputbox medium" type="text" name="subject" value="{SUBJECT}" maxlength="{TOPIC_TITLE_MAXLENGTH}" title="{TOPIC_TITLE_LENGTH_EXPLAIN}" onkeypress="if (event.keyCode==13){return false}" />
@@ -139,23 +206,9 @@
                     <textarea id="text_editor_textarea" name="message">{MESSAGE}</textarea>
                 </div>
             </div>
+ 
 
-            <div id="smiley-box">
-                <div id="smileyContainer">
-                    {L_SMILIES_PREVIEW_NEW}
-                </div><br />
-                {HTML_STATUS}<br />
-                <a href="/faq?mode=bbcode" target="_blank">{BBCODE_STATUS}</a><br />
-                {SMILIES_STATUS}
-            </div>
-
-            <!-- BEGIN edit_reason -->
-            <br />
-            <dl>
-                <dt><label><span style="font-size:11px">{edit_reason.L_EDIT_REASON}</span></label></dt>
-                <dd><input class="inputbox medium" style="width:63%" type="text" name="edit_reason" value="{edit_reason.EDIT_REASON}" maxlength="255" /></dd>
-            </dl>
-            <!-- END edit_reason -->
+ 
 
             <div class="clear"></div>
         </fieldset>
@@ -169,7 +222,7 @@
                 {S_HIDDEN_FORM_FIELDS}
                 <input type="hidden" name="lt" value="{LAST_TOPIC_ID}" />
                 <!-- BEGIN switch_preview -->
-                <input class="button2" type="submit" name="preview" value="{L_PREVIEW}" tabindex="5" />&nbsp;
+                <input class="button2" type="submit" name="preview" value="معاينة التنسيق" tabindex="5" />&nbsp;
                 <!-- END switch_preview -->
                 <!-- BEGIN switch_draft -->
                 &nbsp;<input class="button2" type="submit" name="draft" value="{L_DRAFT}" tabindex="7" accesskey="d" />&nbsp;
@@ -227,63 +280,9 @@
         </div>
     </div>
     <!-- END switch_roll_dice -->
+ 
 
-    <!-- BEGIN switch_attachment_list -->
-    <div class="content-block">
-        <div class="title" id="attachments">{L_ATTACHMENTS}</div>
-        <div class="txt-content">
-          <fieldset class="fields1" style="min-width: inherit;">
-          <!-- BEGIN attachments -->
-              <dl>
-                  <dt><label>{L_ATTACHMENT_FILENAME}</label></dt>
-                  <dd>
-                      <!-- BEGIN switch_is_orphan -->
-                          <span class="gen">{switch_attachment_list.attachments.switch_is_orphan.FILENAME}</span>&nbsp;&nbsp;
-                      <!-- END switch_is_orphan -->
-                      <!-- BEGIN switch_is_not_orphan -->
-                          <a href="{switch_attachment_list.attachments.switch_is_not_orphan.U_ATTACH_URL}" class="gen">{switch_attachment_list.attachments.switch_is_not_orphan.FILENAME}</a>&nbsp;&nbsp;
-                      <!-- END switch_is_not_orphan -->
-                          <input class="liteoption" type="submit" value="{L_ATTACHMENT_DELETE}" name="delete_file[{switch_attachment_list.attachments.ATTACH_POS}]" />
-                  </dd>
-              </dl>
-              <dl>
-                  <dt><label for="filecomment{switch_attachment_list.attachments.ATTACH_POS}">{L_ATTACH_COMMENT}</label></dt>
-                  <dd>
-                      <!--textarea name="comment_list[{switch_attachment_list.attachments.ATTACH_POS}]" cols="35" rows="3" style="color:#000000;width:100%">{switch_attachment_list.attachments.ATTACH_COMMENT}</textarea><br /-->
-                      <input class="inputbox medium" type="text" id="filecomment{switch_attachment_list.attachments.ATTACH_POS}" name="comment_list[{switch_attachment_list.attachments.ATTACH_POS}]" value="{switch_attachment_list.attachments.ATTACH_COMMENT}" maxlength="255" />
-                      <input type="hidden" value="{switch_attachment_list.attachments.ATTACH_ID}" name="attachment_data[{switch_attachment_list.attachments.ATTACH_POS}][attach_id]" />
-                      <input type="hidden" value="{switch_attachment_list.attachments.IS_ORPHAN}" name="attachment_data[{switch_attachment_list.attachments.ATTACH_POS}][is_orphan]" />
-                      <input type="hidden" value="{switch_attachment_list.attachments.REAL_FILENAME}" name="attachment_data[{switch_attachment_list.attachments.ATTACH_POS}][real_filename]" />
-                      <input type="hidden" value="{switch_attachment_list.attachments.ATTACH_COMMENT}" name="attachment_data[{switch_attachment_list.attachments.ATTACH_POS}][attach_comment]" /><br /><br />
-                  </dd>
-              </dl>
-          <!-- END attachments -->
-          </fieldset>
-        </div>
-    </div>
-    <!-- END switch_attachment_list -->
-
-    <!-- BEGIN switch_attachment -->
-    <div class="content-block">
-        <div class="title" id="attachment">{L_ATTACHMENT_ADD}</div>
-        <div class="txt-content">
-          <div id="attachment_show">
-              <fieldset class="fields1">
-                  {L_ATTACHMENT_ADD_HELP}<br /><span class="info">{EXT_LIST}</span><br /><br />
-                  <dl>
-                      <dt><label>{L_ATTACHMENT_FILENAME}</label></dt>
-                      <dd><input type="file" id="fileupload" name="fileupload" /><input type="submit" name="add_file" /> ({L_MAX_ATT_SIZE})</dd>
-                  </dl>
-
-                  <dl>
-                      <dt><label>{L_ATTACH_COMMENT}</label></dt>
-                      <dd><input class="inputbox medium" type="text" value="" id="filecomment" name="filecomment" value="" maxlength="255" /></dd>
-                  </dl>
-              </fieldset>
-          </div>
-        </div>
-    </div>
-    <!-- END switch_attachment -->
+ 
 
     <div class="content-block">
         <div class="title">{L_OPTIONS}</div>
@@ -302,47 +301,22 @@
                 </dd>
             </dl>
             <!-- END switch_icon_checkbox -->
-            <dl>
-                <dt><label for="modif_topic_title">{L_TOPIC_TITLE_MODIFY}</label></dt>
-                <dd>
-                    <input type="text" class="inputbox medium" name="modif_topic_title" id="modif_topic_title" value="{MODIF_TOPIC_TITLE}" maxlength="{TOPIC_DESCRIPTION_MAXLENGTH}" onkeypress="if (event.keyCode==13){return false}" />
-                    <!-- BEGIN switch_topic_button -->
-                    &nbsp;<input type="button" class="button2" value="{L_SOLVED_WITHOUT_BRAKETS}" onclick="set_solved(this.form.elements['modif_topic_title'],'{L_SOLVED}')" style="display:none" id="button_solved" />
-                    <script type="text/javascript">
-                    //<![CDATA[
-                        document.getElementById('button_solved').style.display = 'inline';
-                    //]]>
-                    </script>
-                    <!-- END switch_topic_button -->
-                </dd>
-            </dl>
+ 
         </fieldset>
-        <hr class="dashed" />
+ 
         <!-- END switch_topic_modif -->
         <fieldset class="fields1">
-            <!-- BEGIN switch_html_checkbox -->
-            <label><input type="checkbox" name="disable_html"{S_HTML_CHECKED} />&nbsp;{L_DISABLE_HTML}</label><br />
-            <!-- END switch_html_checkbox -->
+ 
 
-            <!-- BEGIN switch_bbcode_checkbox -->
-            <label><input type="checkbox" name="disable_bbcode"{S_BBCODE_CHECKED} />&nbsp;{L_DISABLE_BBCODE}</label><br />
-            <!-- END switch_bbcode_checkbox -->
-
-            <!-- BEGIN switch_smilies_checkbox -->
-            <label><input type="checkbox" name="disable_smilies"{S_SMILIES_CHECKED} />&nbsp;{L_DISABLE_SMILIES}</label><br />
-            <!-- END switch_smilies_checkbox -->
-
-            <!-- BEGIN switch_signature_checkbox -->
-            <label><input type="checkbox" name="attach_sig"{S_SIGNATURE_CHECKED} />&nbsp;{L_ATTACH_SIGNATURE}</label><br />
-            <!-- END switch_signature_checkbox -->
+ 
 
             <!-- BEGIN switch_notify_checkbox -->
             <label><input type="checkbox" name="notify"{S_NOTIFY_CHECKED} />&nbsp;{L_NOTIFY_ON_REPLY}</label><br />
             <!-- END switch_notify_checkbox -->
-
-            <!-- BEGIN switch_delete_checkbox -->
-            <label><input type="checkbox" name="delete" />&nbsp;{L_DELETE_POST}</label><br />
-            <!-- END switch_delete_checkbox -->
+            <!-- BEGIN switch_signature_checkbox -->
+            <label><input type="checkbox" checked="checked" name="attach_sig"{S_SIGNATURE_CHECKED} />&nbsp;{L_ATTACH_SIGNATURE}</label><br />
+            <!-- END switch_signature_checkbox -->
+ 
 
             <!-- BEGIN switch_type_toggle -->
             <br />{S_TYPE_TOGGLE}
@@ -351,49 +325,12 @@
         </div>
     </div>
 
+ 
 
-    <!-- BEGIN switch_type_cal -->
-    <div class="content-block">
-        <div class="title">{L_CALENDAR}</div>
-        <div class="txt-content">
-        <fieldset>
-        <dl>
-            <dt><label>{L_CALENDAR_TITLE} :</label></dt>
-            <dd>
-                {S_CALENDAR_DAY} {S_CALENDAR_MONTH} {S_CALENDAR_YEAR}
-                <a href="javascript:void(0)" style="font-style:normal;font-weight:normal" onclick="document.post.topic_calendar_day.value={TODAY_DAY};document.post.topic_calendar_month.value={TODAY_MONTH};document.post.topic_calendar_year.value={TODAY_YEAR}">{L_TODAY}</a>
-            </dd>
-        </dl>
-        <dl>
-            <dt><label>{L_TIME} :</label></dt>
-            <dd>
-                <input name="topic_calendar_hour" type="text" maxlength="2" value="{CALENDAR_HOUR}" class="inputbox tiny" />&nbsp;{L_HOURS}&nbsp;&nbsp;
-                <input name="topic_calendar_min" type="text" maxlength="2" value="{CALENDAR_MIN}" class="inputbox tiny" />&nbsp;{L_MINUTES}
-            </dd>
-        </dl>
-        <dl>
-            <dt><label>{L_CALENDAR_DURATION} :</label></dt>
-            <dd>
-                <input name="topic_calendar_duration_day" type="text" maxlength="5" value="{CALENDAR_DURATION_DAY}" class="inputbox tiny" />&nbsp;{L_DAYS}&nbsp;&nbsp;
-                <input name="topic_calendar_duration_hour" type="text" maxlength="5" value="{CALENDAR_DURATION_HOUR}" class="inputbox tiny" />&nbsp;{L_HOURS}&nbsp;&nbsp;
-                <input name="topic_calendar_duration_min" type="text" maxlength="5" value="{CALENDAR_DURATION_MIN}" class="inputbox tiny" />&nbsp;{L_MINUTES}
-                <input name="create_event" type="hidden" value="{CREATE_EVENT}" />
-                <input name="calendar_d" type="hidden" value="{CALENDAR_D}" />
-            </dd>
-        </dl>
-        </fieldset>
-        </div>
-    </div>
-    <!-- END switch_type_cal -->
-
-    {POLLBOX}
+  
 </form>
 
-<!-- BEGIN switch_jumpbox -->
-<form action="{S_JUMPBOX_ACTION}" method="get" name="jumpbox" onsubmit="if(document.jumpbox.f.value == -1){return false}">
-    <p class="right">{L_JUMP_TO}:&nbsp;{S_JUMPBOX_SELECT}&nbsp;<input class="button2" type="submit" value="{L_GO}" /></p>
-</form>
-<!-- END switch_jumpbox -->
+ 
 
 {TOPIC_REVIEW_BOX}
 
