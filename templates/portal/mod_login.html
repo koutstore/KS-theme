@@ -79,7 +79,7 @@
     <div>{L_MESSAGES} : <strong>{NB_MESSAGES}</strong></div>
     <div>{L_PM} : {NB_PM_UNREAD} / {NB_PM_READ}</div>
   </div>
-	<div class="mod_login_links"><a href="{U_PROFILE}">{L_MY_PROFILE}</a></div>
+  
 	<!-- END switch_profile_old -->
 
 	<!-- BEGIN switch_profile -->
@@ -114,3 +114,14 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 <!-- END switch_fb_widget_login -->
+                          <script>
+            $(function(){$(".3thab").html('<div id="notifications_count"> {NB_PM_UNREAD} </div>')});
+            
+            $( document ).ready(function() {
+                var num = parseInt($( "#notifications_count" ).text(),2);
+                if(num == 0){
+                    $("#notifications_count").css("display", "none");
+                };
+            });
+            
+        </script>  
