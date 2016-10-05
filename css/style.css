@@ -14,6 +14,7 @@
 {
 	text-decoration:none
 }
+          @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
 .bodyline
 {
 	background:#F8F8F8;
@@ -2265,4 +2266,3 @@ i.ficon48 {
           transition: all 300ms ease-in;
 }
                           
-          @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
