@@ -5,18 +5,51 @@
  <li id="privmsgs-savebox">{SAVEBOX_IMG}<span class="inbox-icon color-primary" onclick="this.previousSibling.click();"></span> {SAVEBOX}</li>
 </ul>
 
+<style>
+
+.nmsg-btn {
+    border: none;
+    font-family: tahoma;
+    font-size: 15px;
+    display: inline-block;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    background: #17aa56;
+    color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px #119e4d;
+    padding: 13px 88px 13px 21px;
+}
+ 
+.icon-envelope::after {
+    content: "\f0e0";
+    font-family: FontAwesome;
+      position: absolute;
+    right: 33px;
+    width: 40%;
+    font-size: 160%;
+    line-height: 0.8;
+    color: #0a833d;
+}
+  .nmsg-btn:hover {
+    color: #fff;
+}
+</style>
 <form action="{S_PRIVMSGS_ACTION}" method="post">
 
 <!-- BEGIN switch_post_reply -->
 <div class="topic-actions">
 	<div class="buttons">
-		<div class="post-icon">{REPLY_PM_IMG}</div>
+	  <div class="post-icon">
+                    <a class="nmsg-btn icon-envelope" href="privmsg?mode=reply&p=">الرد على الرسالة</a>
+          </div>
 	</div>
 </div>
 <div class="clear"></div>
 <!-- END switch_post_reply -->
 
-<h1 class="page-title">{BOX_NAME} :: {L_MESSAGE}</h1>
+ 
 <div class="content-block post">
   <div class="title">{POST_SUBJECT}</div>
 	<div class="post-inner">
@@ -33,7 +66,7 @@
   </div>
 
 	<div class="postbody">
-    <p class="author">{L_FROM} {MESSAGE_FROM} {L_TO} {MESSAGE_TO}, {POST_DATE}</p>
+    <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i> {POST_DATE}</p>
 
 		<ul class="profile-icons">
 			<!-- BEGIN switch_quote -->
@@ -59,24 +92,10 @@
 	<!-- END switch_move_profile -->
 	<input class="button2" type="submit" name="delete" value="{L_DELETE_MSG}" />
 </fieldset>
-
-<!-- BEGIN switch_post_reply -->
-<div class="topic-actions">
-	<div class="buttons">
-		<div class="post-icon">{REPLY_PM_IMG}</div>
-	</div>
-</div>
-<div class="clear"></div>
-<!-- END switch_post_reply -->
-
+ 
 </form>
 
-<!-- BEGIN switch_review_box -->
-{TOPIC_REVIEW_BOX}
-<!-- END switch_review_box -->
-
-{JUMPBOX}
-
+ 
 <!-- BEGIN switch_image_resize -->
 <script type="text/javascript">
 //<![CDATA[
