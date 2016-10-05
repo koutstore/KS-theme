@@ -1,42 +1,7 @@
-<!-- BEGIN topics_list_box -->
+  <!-- BEGIN topics_list_box -->
 <!-- BEGIN row -->
 <!-- BEGIN header_table -->
-	<!-- BEGIN multi_selection -->
-		<script type="text/javascript">
-
-		function check_uncheck_main_{topics_list_box.row.header_table.BOX_ID}()
-		{
-			alert('MAIN');
-
-			var all_checked = true;
-
-			for (i = 0; (i < document.{topics_list_box.FORMNAME}.elements.length) && all_checked; i++)
-			{
-				if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}')
-				{
-					all_checked = document.{topics_list_box.FORMNAME}.elements[i].checked;
-				}
-			}
-
-			document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked = all_checked;
-		}
-
-		function check_uncheck_all_{topics_list_box.row.header_table.BOX_ID}()
-		{
-			alert('ALL');
-
-			for (i = 0; i < document.{topics_list_box.FORMNAME}.length; i++)
-			{
-				if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}')
-				{
-					document.{topics_list_box.FORMNAME}.elements[i].checked = document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked;
-				}
-			}
-		}
-
-		</script>
-	<!-- END multi_selection -->
-
+ 
 	<div class="forum-category topicslist announcement">
 	  <div class="title">
 		  <!-- BEGIN multi_selection -->
@@ -71,9 +36,12 @@
 
         <div class="forum-status" title="{topics_list_box.row.L_TOPIC_FOLDER_ALT}" style="background-image:url('{topics_list_box.row.TOPIC_FOLDER_IMG}');">
         </div>
-
-        <div class="forum-info" {topics_list_box.row.ICON}>
-        	<span class="newpost-img">{topics_list_box.row.NEWEST_POST_IMG}</span>
+        <div class="topic-icon" {topics_list_box.row.ICON}>
+            
+        </div>
+        <div class="forum-info" >
+        <div class="topic-info" >
+        
   				<span class="participated">{topics_list_box.row.PARTICIPATE_POST_IMG}</span>
   			  <span class="topic-type">{topics_list_box.row.TOPIC_TYPE}</span>
           <h2 class="topic-title">
@@ -84,10 +52,11 @@
   				<div class="topic-desc">{topics_list_box.row.topic.switch_description.TOPIC_DESCRIPTION}</div>
   				<!-- END switch_description -->
 
-  			  <div class="topic-info">
+  			  <div class="topic-info2">
             {topics_list_box.row.GOTO_PAGE_NEW}
   				  <span class="topic-author">{topics_list_box.row.L_BY} <strong>{topics_list_box.row.TOPIC_AUTHOR}</strong></span>
   				  <!-- BEGIN nav_tree -->{topics_list_box.row.TOPIC_NAV_TREE_NEW}<!-- END nav_tree -->
+          </div>
           </div>
         </div>
 
@@ -95,12 +64,12 @@
 
           <div class="posts">
             <span class="number">{topics_list_box.row.REPLIES}</span><br/>
-            <small>{L_REPLIES}</small>
+            <small>التعليقات</small>
           </div>
 
           <div class="views">
             <span class="number">{topics_list_box.row.VIEWS}</span><br/>
-            <small>{L_VIEWS}</small>
+            <small>المشاهدات</small>
           </div>
 
         </div>
