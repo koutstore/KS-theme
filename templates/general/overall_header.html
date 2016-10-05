@@ -122,7 +122,7 @@
  
 	{GREETING_POPUP}
  
-	{HOSTING_JS}
+
  
 
 	<!-- BEGIN google_analytics_code -->
@@ -166,51 +166,60 @@
 <div class="countryicon"><a href="#menu"><span class="flag_kw flags"></span><br><font color="#FFFFFF">KW</font></a></div>
   <form class="search-header" action="/search">
   <input name="search_keywords"   type="text" placeholder="أدخل كلمات البحث . . ."  >
-  <button value="Go" type="submit">&#1576;&#1581;&#1579;</button>
+  <button value="Go" type="submit">بحث</button>
 </form>   
+
+                <!-- BEGIN switch_user_logged_out -->
+   <ul id="user-account-nav">
+        <li><a href="register" class="button resd"><span>حساب جديد</span></a></li>
+ 
+        <li style="
+    height: 44px;
+"><a href="login" class="nbutton fancybox">دخول</a></li>
+    </ul>
+            <!-- END switch_user_logged_out -->
     <!-- BEGIN switch_user_logged_in -->
 
      
-      <span class="Ahla-avatar"></span>
+
       <div class="dropdown">
       <input class="dropdown-toggle" type=" ">
-      <div class="dropdown-text">   <span class="Ahla-username"></span></div>
+      <div class="dropdown-text">       <span class="Ahla-avatar"></span></div>
       <ul class="dropdown-content">
       <li>    <div class="ksuserlink"> </div></li>
-      <li><a  href="profile?mode=editprofile"><i class="fa fa-tasks ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610;&#1577;</a></li>
-      <li><a  href="profile?mode=editprofile&amp;page_profil=preferences"><i class="fa fa-cog ulfa" aria-hidden="true"></i>&#1575;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1581;&#1587;&#1575;&#1576;</a></li>
-      <li><a  href="privmsg?folder=inbox"><i class="fa fa-envelope ulfa" aria-hidden="true" ></i>&#1575;&#1604;&#1585;&#1587;&#1575;&#1574;&#1604; &#1575;&#1604;&#1582;&#1575;&#1589;&#1577;</a></li>
-      <li><a  href="search?search_id=favouritesearch"><i class="fa fa-star ulfa" aria-hidden="true"></i>&#1575;&#1604;&#1605;&#1601;&#1590;&#1604;&#1577;</a></li>
-      <li><a  href="profile?mode=editprofile&amp;page_profil=avatars"><i class="fa fa-camera-retro ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1589;&#1608;&#1585;&#1577; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610;&#1577;</a></li>
-      <li><a  href="profile?mode=editprofile&amp;page_profil=signature"><i class="fa fa-puzzle-piece ulfa" aria-hidden="true"></i>&#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1578;&#1608;&#1602;&#1610;&#1593;</a></li>
-      <li><a  href="login?logout=1"><i class="fa fa-power-off ulfa" aria-hidden="true"></i>&#1578;&#1587;&#1580;&#1610;&#1604; &#1575;&#1604;&#1582;&#1585;&#1608;&#1580;</a></li></ul></div>
+      <li><a  href="profile?mode=editprofile"><i class="fa fa-tasks ulfa" aria-hidden="true"></i>تعديل البيانات الشخصية</a></li>
+      <li><a  href="profile?mode=editprofile&page_profil=preferences"><i class="fa fa-cog ulfa" aria-hidden="true"></i>اعدادات الحساب</a></li>
+      <li><a  href="privmsg?folder=inbox"><i class="fa fa-envelope ulfa" aria-hidden="true" ></i>الرسائل الخاصة</a></li>
+      <li><a  href="search?search_id=favouritesearch"><i class="fa fa-star ulfa" aria-hidden="true"></i>المفضلة</a></li>
+      <li><a  href="profile?mode=editprofile&page_profil=avatars"><i class="fa fa-camera-retro ulfa" aria-hidden="true"></i>تعديل الصورة الشخصية</a></li>
+      <li><a  href="profile?mode=editprofile&page_profil=signature"><i class="fa fa-puzzle-piece ulfa" aria-hidden="true"></i>تعديل التوقيع</a></li>
+      <li><a  href="login?logout=1"><i class="fa fa-power-off ulfa" aria-hidden="true"></i>تسجيل الخروج</a></li></ul></div>
         
              <a id="privmsg-menu" href="privmsg?folder=inbox">		
      <i id="faedit" class="fa fa-envelope" aria-hidden="true"></i>
      <div class="3thab"></div>
      </a>
-     <!-- END switch_user_logged_in -->
-
+         <!-- END switch_user_logged_in -->
         <a href="#menu" id="toggle"><span></span></a>
 
 <div id="menu">
   <ul class="ulmenu">
 
-    <li><a class="ulmenu" href="http://koutstore.com">&#1575;&#1604;&#1603;&#1608;&#1610;&#1578;<span class="flag_kw flags"></span></a></li>
-    <li><a class="ulmenu" href="http://eg.koutstore.com">&#1605;&#1589;&#1585;<span class="flag_eg flags"></span></a></li>
-    <li><a class="ulmenu" href="http://ps.koutstore.com">&#1601;&#1604;&#1587;&#1591;&#1610;&#1606;<span class="flag_ps flags"></span></a></li>
-    <li><a class="ulmenu" href="http://dz.koutstore.com">&#1575;&#1604;&#1580;&#1586;&#1575;&#1574;&#1585;<span class="flag_dz flags"></span></a></li>
+    <li><a class="ulmenu" href="http://koutstore.com">الكويت<span class="flag_kw flags"></span></a></li>
+    <li><a class="ulmenu" href="http://eg.koutstore.com">مصر<span class="flag_eg flags"></span></a></li>
+    <li><a class="ulmenu" href="http://ps.koutstore.com">فلسطين<span class="flag_ps flags"></span></a></li>
+    <li><a class="ulmenu" href="http://dz.koutstore.com">الجزائر<span class="flag_dz flags"></span></a></li>
     <li><a class="ulmenu" href="http://us.koutstore.com">usa<span class="flag_us flags"></span></a></li>
   </ul>
- </div>
- 	<script src="http://www.koutstore.com/11508.js" type="text/javascript"></script>
+ </div>	
+ 
  
 </header>
-	
+
 
 <a id="top" name="top" accesskey="t"></a>
 {JAVASCRIPT}
-
+ {HOSTING_JS}
 	<div id="page-header" class="color-primary">
  
 
@@ -264,7 +273,7 @@
 			</div>
 		</div>
 		<!-- END switch_ticker -->
-
+ 
 	<div id="{ID_CONTENT_CONTAINER}"{CLASS_CONTENT_CONTAINER}>
 		<div id="outer-wrapper">
 			<div id="wrapper">
