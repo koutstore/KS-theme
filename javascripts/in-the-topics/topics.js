@@ -1,4 +1,4 @@
-/******************************
+ /******************************
 ** ======= FUNCTIONS ======= **
 *******************************
 ** 00. group_color
@@ -613,7 +613,7 @@ $(function() {
          lang: {
              mark: '<span>تم البيع ؟</span><div class="soldicon trans"><i class="fa fa-gavel"></i></div>',
              mark_title: 'اضغط هنا',
-             mark_title_mod: 'Mark this topic Solved',
+             mark_title_mod: 'قم بالضغط على زر تم البيع ليعلم الجميع ان اعلانك انتهى ليتم ختمه',
              marking: '<div class="soldicon"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>',
              marked: ' <div class="soldicon"><i class="fa fa-check"></i></div> '
          },
@@ -1191,16 +1191,16 @@ $(function() {
         var href = $('a[href*="mode=reply"]').attr("href");
         var value = $("#text_editor_textarea").sceditor("instance").val().replace(/\s/g, '').length;
         if(10 <= value){
-        $('<span class="lreply" style="color: red;font-weight: bold; text-transform: uppercase;"><br>Your message is being posted...</span>').appendTo("#quick_reply div:last");
+        $('<span class="lreply" style="color: red;font-weight: bold; text-transform: uppercase;"><br>يتم الارسال ش...</span>').appendTo("#quick_reply div:last");
         $("#text_editor_textarea").val($("#text_editor_textarea").sceditor('instance').val());
         $.post('/post', $('#quick_reply').serialize() + '&post=Send', function(t) {
          
         if(t.indexOf("Flood") != -1){
-        alert("Error!\nYou must wait 5 second before replying");
+        alert("خطأ !\nهذا الموقع يتطلب بأن تنتظر 10 ثواني بين كل عملية وأخرى");
         $(".lreply").fadeOut(300);
         }
         if(t.indexOf("A new") != -1){
-        alert("Error!\nSomeone had replied before you posted\nYou must refresh the page to continue.\nNotice : You should save or copy your message if you don't want it gone");
+        alert("خطأ !\nهناك شخص قام بالتعليق على المنشور في نفس الوقت\nيجب تحديث الصفحة و المحاولة مرةاخرى.\nملاحظة : تأكد من حفظك للمحتوى في صندوق المحرر قبل تحديث الصفحة ");
         $(".lreply").fadeOut(300);
         }
         if($(t).find('.content-block a[href*="/viewtopic"]:first').attr('href').length >1) {
@@ -1218,7 +1218,7 @@ $(function() {
         });
         }
         else {
-        alert("Sorry\nThe content is too short to send!\nYou must write at least 10 characters.");
+        alert("خطأ\nعدد حروف المحتوى الذي أدخلته قصير جداً ،\n يجب أن تتجاوز 10 حروف.");
         }
         });
         });
