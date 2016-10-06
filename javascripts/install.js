@@ -2873,6 +2873,16 @@ FAE.step = [
      mobile : 1,
   },
     
+    
+      {
+    info : 'Getting template index_box.html (mobile)',
+    type : 'GET',
+     url : FAE.raw + 'templates/mobile-version/index_box.html',
+    func : function(d) {
+      FAE.step[FAE.index + 1].data.template = d;
+    }
+  },
+    
       {
     info : 'Installing template index_box.html (mobile)',
     type : 'POST',
@@ -2893,24 +2903,14 @@ FAE.step = [
      mobile : 1,
   },
 
-          {
-    info : 'Installing template index_box.html (mobile)',
-    type : 'POST',
-     url : 'part=themes&sub=templates&mode=edit_main&extended_admin=1',
-    data : {
-             t : 1007,
-             l : 'mobile',
-      tpl_name : 'index_box',
-        submit : 'Save'
+          
+       {
+    info : 'Getting template overall_footer.html (mobile)',
+    type : 'GET',
+     url : FAE.raw + 'templates/mobile-version/overall_footer.html',
+    func : function(d) {
+      FAE.step[FAE.index + 1].data.template = d;
     }
-  },
-
-
-  {
-       info : 'Publishing template index_box.html (mobile)',
-       type : 'PUBLISH',
-        tpl : 1007,
-     mobile : 1,
   },
     
           {
