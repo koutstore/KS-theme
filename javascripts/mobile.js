@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
                         void 0!==a[b]&&jQuery(this).closest("a").find(".material-icons").attr("class",a[b])
                         })});
                         
-$(function(){
+                             (function(){
       $('.menu-left').click(function(){
         $('header').toggleClass('active'),
           $('#menu-left').toggleClass('active'),
@@ -30,13 +30,10 @@ $(function(){
       $('.menu-right').click(function(){$('#menu-right').toggleClass('active')});
     })();
 
-$(function(){
+ (function(){
  
   $('.menu-search').click(function(){
     $('#mobile-search, .menu-search').toggleClass('active')
   })
  
-})();
- 
- $(function(){$.each(_userdata,function(a,b){$(".mob-"+a).html(b)})}),$(function(){$.each(_userdata,function(a,b){$(".mob-"+a).html(b)})}),$(document).ready(function(){$(".ksuserlink").html('<a href="/u'+_userdata.user_id+'"><i class="fa fa-user"></i>  &#1575;&#1604;&#1605;&#1604;&#1601; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610; </a>')})();
- 
+})()
