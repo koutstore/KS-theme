@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
                         void 0!==a[b]&&jQuery(this).closest("a").find(".material-icons").attr("class",a[b])
                         })});
                         
-                             (function(){
+                             $(function(){
       $('.menu-left').click(function(){
         $('header').toggleClass('active'),
           $('#menu-left').toggleClass('active'),
@@ -30,10 +30,10 @@ jQuery(document).ready(function(){
       $('.menu-right').click(function(){$('#menu-right').toggleClass('active')});
     })();
 
- (function(){
+ $(function(){
  
   $('.menu-search').click(function(){
     $('#mobile-search, .menu-search').toggleClass('active')
-  })
+  });
  
-})()
+})();
