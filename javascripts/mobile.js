@@ -29,11 +29,4 @@ jQuery(document).ready(function(){
       });
       $('.menu-right').click(function(){$('#menu-right').toggleClass('active')});
     })();
-
- (function(){
  
-  $('.menu-search').click(function(){
-    $('#mobile-search, .menu-search').toggleClass('active')
-  });
- 
-}());
