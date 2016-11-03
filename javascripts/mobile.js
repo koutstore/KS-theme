@@ -34,6 +34,6 @@ jQuery(document).ready(function(){
  
   $('.menu-search').click(function(){
     $('#mobile-search, .menu-search').toggleClass('active')
-  });
+  }());
  
 }());
