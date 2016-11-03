@@ -36,4 +36,4 @@ jQuery(document).ready(function(){
     $('#mobile-search, .menu-search').toggleClass('active')
   });
  
-})();
+}());
