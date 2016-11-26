@@ -208,17 +208,116 @@
 <!-- BEGIN switch_user_logged_in -->
 <a name="quickreply"></a>
 {QUICK_REPLY_FORM}
-<!-- END switch_user_logged_in -->
-  
-<div class="topic-actions">
- 
- 
+<!-- END switch_user_logged_in --> 
 
+<div class="topic-actions">
+
+		<!-- BEGIN switch_user_authreply -->
+		<a href="{U_POST_REPLY_TOPIC}"><img src="http://illiweb.com/fa/empty.gif" class="i_reply" alt="{L_POST_REPLY_TOPIC}" /></a>
+		<!-- END switch_user_authreply -->
 	<div class="pagination">
 		{PAGE_NUMBER}
 	</div>
-</div>
+    <div class="topic-url"></div>
  
+        <div  class="box-feed">
+            <div style="text-align: center;color: #9c9292;">اعلانات مشابهة</div>
+            <div id="fa_topics_similar" class="inside-feed"></div>
+            <div id="msg-feed" ></div>
+        </div>
+        <script>
+$(function () {
+    $.ajax({
+        url: "/feed/?f={FORUM_ID}",
+        success: function (a) {
+  $(".topic-url").after('<div class="box-feed"><div style="text-align: center;color: #9c9292;">اخر اعلانات القسم</div><div id="cungchuyenmuc" class="inside-feed"></div></div>');
+            40 < $(a).find("title").length ? so = 40 : so = $(a).find("title").length;
+            for (i = 2; i < so; i++) $('<a href="' + $(a).find("link:eq(" + i + ")").text() + '">' + $(a).find("title:eq(" + i + ")").text() + "</a><br/>").appendTo("#cungchuyenmuc")
+        }
+    })
+});
+
+       (function() {
+          var amount = 22,
+              lang = {
+                see_more : 'معاينة جميع الاعلانات المشابهة',
+                loading : 'يتم البحث عن اعلانات مشابهة...',
+                error_node : '<code>#fa_topics_similar</code> خطأ',
+                error_version : 'خطأ في الوصول'
+              },
+         
+              url = '/search?search_keywords=',
+              node = document.getElementById('fa_topics_similar'),
+              temp = document.createElement('DIV');
+            
+         
+          if (/\/t\d+/.test(window.location.href) && node) {
+            url += encodeURIComponent(document.title.replace(/(.*?)(?:\s-\s.*)/, function(M, S) { return S }));
+            node.innerHTML = lang.loading;
+         
+            jQuery.get(url + '&change_version=prosilver', function(d) {
+              topics = jQuery('a.topictitle', d);
+              node.innerHTML = '';
+         
+              if (topics[0]) {
+         
+                for (var i = 0, j = amount + 22; i < j; i++) {
+                  if (topics[i]) {
+                    topics[i].href = topics[i].href.replace(/\?.*/, '');
+                    if (!new RegExp(topics[i].href).test(window.location.href)) {
+                      jQuery('.coloradmin', topics[i]).removeAttr('style class');
+                      temp.appendChild(topics[i]);
+                    }
+                  }
+                }
+         
+                node.appendChild(temp); 
+              } else {
+                hideModule(node);
+              }
+            });
+            document.getElementById("msg-feed").innerHTML = '<div id="fa_ts_more" style="text-align: center;"><a href="' + url + '">' + lang.see_more + '</a></div>';
+          } else if (node) {
+            hideModule(node);
+          } else {
+            document.getElementById("msg-feed").innerHTML = '<p style="color:#F30;font-size:12px;" style="text-align: center;">' + lang.error_node + '<p>';
+          }
+        }());
+
+
+
+
+jQuery(function () {
+
+    var iTagLength = 2;
+    var sTagTitle = 'الكلمات الدليلة:';
+    var sTagToolTip = 'البحث عن المزيد من هذه الكلمة';
+    var oConfig = {
+        sContent:
+            '<span id="tags_search"><span>' + sTagTitle + ' </span></span>',
+        sTarget: ''
+    };
+
+    var phpBB3 = jQuery('#content-container');
+
+if(phpBB3.length) {
+        $('#main-content .topic-actions:last').before(oConfig.sContent);
+        oConfig.sTarget = 'h1.page-title';
+    } 
+    var tags = jQuery(oConfig.sTarget).text().split(' ');
+    jQuery.each(tags, function(index, data) {
+        if(data.length > iTagLength) {
+            $('#tags_search').append(
+                '<a id="tag_search_' + index + '" class="ipsTag" title="' + sTagToolTip + ' ' + data + '" href="/search?search_keywords=' + data + '">' +
+                '    <span>' + data + '</span>' +
+                '</a>'
+            );
+        }
+    });
+}());
+</script>
+ 
+</div>  
 
 <!-- BEGIN viewtopic_bottom -->
  
@@ -235,5 +334,4 @@ $(resize_images({ 'selector' : '.postbody .content', 'max_width' : {switch_image
 //]]>
 </script>
 <!-- END switch_image_resize -->
-
  
