@@ -11,6 +11,7 @@
 ** 07. fae_toggle_category //
 ** 08. sticky_nav_notifications//
 ** 09. update_notifier //
+** 00.mintion search
 ******************************/
 
 // IMPORTANT DATA (DO NOT DELETE)
@@ -164,16 +165,163 @@ $(function() {
 }());
 
 
-/* -- toolip - تلميحات -- */
-!function(t){function i(t){(t.attr("title")||"string"!=typeof t.attr("original-title"))&&t.attr("original-title",t.attr("title")||"").removeAttr("title")}function e(e,s){this.$element=t(e),this.options=s,this.enabled=!0,i(this.$element)}e.prototype={show:function(){var i=this.getTitle();if(i&&this.enabled){var e=this.tip();e.find(".tipsy-inner")[this.options.html?"html":"text"](i),e[0].className="tipsy",e.remove().css({top:0,left:0,visibility:"hidden",display:"block"}).appendTo(document.body);var s,n=t.extend({},this.$element.offset(),{width:this.$element[0].offsetWidth,height:this.$element[0].offsetHeight}),o=e[0].offsetWidth,l=e[0].offsetHeight,a="function"==typeof this.options.gravity?this.options.gravity.call(this.$element[0]):this.options.gravity;switch(a.charAt(0)){case"n":s={top:n.top+n.height+this.options.offset,left:n.left+n.width/2-o/2};break;case"s":s={top:n.top-l-this.options.offset,left:n.left+n.width/2-o/2};break;case"e":s={top:n.top+n.height/2-l/2,left:n.left-o-this.options.offset};break;case"w":s={top:n.top+n.height/2-l/2,left:n.left+n.width+this.options.offset}}2==a.length&&("w"==a.charAt(1)?s.left=n.left+n.width/2-15:s.left=n.left+n.width/2-o+15),e.css(s).addClass("tipsy-"+a),this.options.fade?e.stop().css({opacity:0,display:"block",visibility:"visible"}).animate({opacity:this.options.opacity}):e.css({visibility:"visible",opacity:this.options.opacity})}},hide:function(){this.options.fade?this.tip().stop().fadeOut(function(){t(this).remove()}):this.tip().remove()},getTitle:function(){var t,e=this.$element,s=this.options;i(e);var t,s=this.options;return"string"==typeof s.title?t=e.attr("title"==s.title?"original-title":s.title):"function"==typeof s.title&&(t=s.title.call(e[0])),t=(""+t).replace(/(^\s*|\s*$)/,""),t||s.fallback},tip:function(){return this.$tip||(this.$tip=t('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"/></div>')),this.$tip},validate:function(){this.$element[0].parentNode||(this.hide(),this.$element=null,this.options=null)},enable:function(){this.enabled=!0},disable:function(){this.enabled=!1},toggleEnabled:function(){this.enabled=!this.enabled}},t.fn.tipsy=function(i){function s(s){var n=t.data(s,"tipsy");return n||(n=new e(s,t.fn.tipsy.elementOptions(s,i)),t.data(s,"tipsy",n)),n}function n(){var t=s(this);t.hoverState="in",0==i.delayIn?t.show():setTimeout(function(){"in"==t.hoverState&&t.show()},i.delayIn)}function o(){var t=s(this);t.hoverState="out",0==i.delayOut?t.hide():setTimeout(function(){"out"==t.hoverState&&t.hide()},i.delayOut)}if(i===!0)return this.data("tipsy");if("string"==typeof i)return this.data("tipsy")[i]();if(i=t.extend({},t.fn.tipsy.defaults,i),i.live||this.each(function(){s(this)}),"manual"!=i.trigger){var l=i.live?"live":"bind",a="hover"==i.trigger?"mouseenter":"focus",h="hover"==i.trigger?"mouseleave":"blur";this[l](a,n)[l](h,o)}return this},t.fn.tipsy.defaults={delayIn:0,delayOut:0,fade:!1,fallback:"",gravity:"n",html:!1,live:!1,offset:0,opacity:.8,title:"title",trigger:"hover"},t.fn.tipsy.elementOptions=function(i,e){return t.metadata?t.extend({},e,t(i).metadata()):e},t.fn.tipsy.autoNS=function(){return t(this).offset().top>t(document).scrollTop()+t(window).height()/2?"s":"n"},t.fn.tipsy.autoWE=function(){return t(this).offset().left>t(document).scrollLeft()+t(window).width()/2?"e":"w"}}(jQuery);
+/* -- tooltip - تلميحات -- */
+! function (t) {
+  
+  $('img').on('mouseenter', function () { // Here Image Alt = Title
+    $('img').attr('title', $(this).attr('alt'));
+  });
+  
+    function i(t) {
+        (t.attr("title") || "string" != typeof t.attr("original-title")) && t.attr("original-title", t.attr("title") || "").removeAttr("title")
+     }
 
+    function e(e, s) {
+        this.$element = t(e), this.options = s, this.enabled = !0, i(this.$element)
+    }
+    e.prototype = {
+        show: function () {
+            var i = this.getTitle();
+            if (i && this.enabled) {
+                var e = this.tip();
+                e.find(".tipsy-inner")[this.options.html ? "html" : "text"](i), e[0].className = "tipsy", e.remove().css({
+                    top: 0,
+                    left: 0,
+                    visibility: "hidden",
+                    display: "block"
+                }).appendTo(document.body);
+                var s, n = t.extend({}, this.$element.offset(), {
+                        width: this.$element[0].offsetWidth,
+                        height: this.$element[0].offsetHeight
+                    }),
+                    o = e[0].offsetWidth,
+                    l = e[0].offsetHeight,
+                    a = "function" == typeof this.options.gravity ? this.options.gravity.call(this.$element[0]) : this.options.gravity;
+                switch (a.charAt(0)) {
+                case "n":
+                    s = {
+                        top: n.top + n.height + this.options.offset,
+                        left: n.left + n.width / 2 - o / 2
+                    };
+                    break;
+                case "s":
+                    s = {
+                        top: n.top - l - this.options.offset,
+                        left: n.left + n.width / 2 - o / 2
+                    };
+                    break;
+                case "e":
+                    s = {
+                        top: n.top + n.height / 2 - l / 2,
+                        left: n.left - o - this.options.offset
+                    };
+                    break;
+                case "w":
+                    s = {
+                        top: n.top + n.height / 2 - l / 2,
+                        left: n.left + n.width + this.options.offset
+                    }
+                }
+                2 == a.length && ("w" == a.charAt(1) ? s.left = n.left + n.width / 2 - 15 : s.left = n.left + n.width / 2 - o + 15), e.css(s).addClass("tipsy-" + a), this.options.fade ? e.stop().css({
+                    opacity: 0,
+                    display: "block",
+                    visibility: "visible"
+                }).animate({
+                    opacity: this.options.opacity
+                }) : e.css({
+                    visibility: "visible",
+                    opacity: this.options.opacity
+                })
+            }
+        },
+        hide: function () {
+            this.options.fade ? this.tip().stop().fadeOut(function () {
+                t(this).remove()
+            }) : this.tip().remove()
+        },
+        getTitle: function () {
+            var t, e = this.$element,
+                s = this.options;
+            i(e);
+            var t, s = this.options;
+            return "string" == typeof s.title ? t = e.attr("title" == s.title ? "original-title" : s.title) : "function" == typeof s.title && (t = s.title.call(e[0])), t = ("" + t).replace(/(^\s*|\s*$)/, ""), t || s.fallback
+        },
+        tip: function () {
+            return this.$tip || (this.$tip = t('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"/></div>')), this.$tip
+        },
+        validate: function () {
+            this.$element[0].parentNode || (this.hide(), this.$element = null, this.options = null)
+        },
+        enable: function () {
+            this.enabled = !0
+        },
+        disable: function () {
+            this.enabled = !1
+        },
+        toggleEnabled: function () {
+            this.enabled = !this.enabled
+        }
+    }, t.fn.tipsy = function (i) {
+        function s(s) {
+            var n = t.data(s, "tipsy");
+            return n || (n = new e(s, t.fn.tipsy.elementOptions(s, i)), t.data(s, "tipsy", n)), n
+        }
 
-jQuery( document ).ready(function() {
-	jQuery("a").tipsy({gravity:"se",delayIn:0,delayOut:0,fade:1});
-	jQuery('head').append('<style type="text/css">.tipsy { padding: 5px; font-size: 10px; position: absolute; z-index: 100000; }</style>');
+        function n() {
+            var t = s(this);
+            t.hoverState = "in", 0 == i.delayIn ? t.show() : setTimeout(function () {
+                "in" == t.hoverState && t.show()
+            }, i.delayIn)
+        }
+
+        function o() {
+            var t = s(this);
+            t.hoverState = "out", 0 == i.delayOut ? t.hide() : setTimeout(function () {
+                "out" == t.hoverState && t.hide()
+            }, i.delayOut)
+        }
+        if (i === !0) return this.data("tipsy");
+        if ("string" == typeof i) return this.data("tipsy")[i]();
+        if (i = t.extend({}, t.fn.tipsy.defaults, i), i.live || this.each(function () {
+                s(this)
+            }), "manual" != i.trigger) {
+            var l = i.live ? "live" : "bind",
+                a = "hover" == i.trigger ? "mouseenter" : "focus",
+                h = "hover" == i.trigger ? "mouseleave" : "blur";
+            this[l](a, n)[l](h, o)
+        }
+        return this
+    }, t.fn.tipsy.defaults = {
+        delayIn: 0,
+        delayOut: 0,
+        fade: !1,
+        fallback: "",
+        gravity: "n",
+        html: !1,
+        live: !1,
+        offset: 0,
+        opacity: .8,
+        title: "title",
+        trigger: "hover"
+    }, t.fn.tipsy.elementOptions = function (i, e) {
+        return t.metadata ? t.extend({}, e, t(i).metadata()) : e
+    }, t.fn.tipsy.autoNS = function () {
+        return t(this).offset().top > t(document).scrollTop() + t(window).height() / 2 ? "s" : "n"
+    }, t.fn.tipsy.autoWE = function () {
+        return t(this).offset().left > t(document).scrollLeft() + t(window).width() / 2 ? "e" : "w"
+    }
+}(jQuery);
+
+jQuery(document).ready(function () {
+  
+    jQuery("a, img").tipsy({
+        gravity: "se",
+        delayIn: 0,
+        delayOut: 0,
+        fade: 1
+    });
+    jQuery('head').append('<style type="text/css">.tipsy { padding: 5px; font-size: 10px; position: absolute; z-index: 100000; }</style>');
 });
-
-
 
 
 
@@ -378,9 +526,7 @@ s0.parentNode.insertBefore(s1,s0);
                     })
                   }, 200);
                 });
-
-
-
+ 
 
 /* notifcation popup */
 (function() {
@@ -694,7 +840,7 @@ jQuery(function () {
             * User Definition Variables
             ***/
             /* Put here the amount number of PMs returned!!! */
-            var iAmount = 10;   
+            var iAmount = 5;   
             /***
             * System Defined Variables - Do not edit if you don't know!
             ***/
@@ -767,7 +913,7 @@ jQuery(function () {
                                         memDiv.html()
                                             .replace(/\<\/a\> por/g, '</a></br><span class="ipsType_smaller desc lighter">')
                                             .replace(/\<\/td\>/g, '</span></div></li>')
-                                            .replace(/\<td class="tcl tdtopics"\>/g, '<li class="ipsType_small clearfix"><img class="ipsUserPhoto ipsUserPhoto_mini left" alt="User image" src="http://i78.servimg.com/u/f78/18/17/62/92/defaul10.png"><div class="list_content">')
+                                            .replace(/\<td class="tcl tdtopics"\>/g, '<li class="ipsType_small clearfix"><img class="ipsUserPhoto ipsUserPhoto_mini left" alt="User image" src="https://i78.servimg.com/u/f78/18/17/62/92/defaul10.png"><div class="list_content">')
                                     )
                                     .find('span.status').remove();
                             } else {
@@ -779,7 +925,7 @@ jQuery(function () {
                                 jQuery.each(oConfig.sTarget, function( index, value ) {
                                     sHtml +=
                                         '<li class="ipsType_small clearfix">' +
-                                            '<img class="ipsUserPhoto ipsUserPhoto_mini left" alt="User image" src="http://i78.servimg.com/u/f78/18/17/62/92/defaul10.png">' +
+                                            '<img class="ipsUserPhoto ipsUserPhoto_mini left" alt="User image" src="https://i78.servimg.com/u/f78/18/17/62/92/defaul10.png">' +
                                             '<div class="list_content">' +
                                                 eval( oConfig.sExpression1 ) + '<br>' +
                                                 '<span class="ipsType_smaller desc lighter">' + eval( oConfig.sExpression2 ) + '</span>' +
@@ -837,10 +983,23 @@ jQuery(function () {
 /* user profile on hover */
 
         $(function() {
-          var links = $('a[href^="/u"]'),
-              usersinfo = {};
+          var links = $('a[href^="/u"]').filter(function() {
+            if (this.firstChild && this.firstChild.tagName) {
+              if (this.firstChild.tagName != 'IMG') {
+                return this;
+              }
+            } else {
+              return this;
+            }
+          }),
          
-          links.tooltipster && links.not('.mentiontag, .tooltipstered').tooltipster({
+          usersinfo = {};
+         
+          links.tooltipster && links.not('.mentiontag, .tooltipstered').filter(function() {
+            if (!$(this).closest('#tabs')[0]) {
+              return this;
+            }
+          }).tooltipster({
             animation : 'fade',
             interactive : true,
             contentAsHTML : true,
@@ -862,7 +1021,7 @@ jQuery(function () {
                     type: 'GET',
                     url: "/ajax/index.php",
                     dataType: "html",
-                   
+                 
                     data: {
                       f: "m",
                       user_id: userid
@@ -883,7 +1042,7 @@ jQuery(function () {
 
 /* Login / Logout Redirector */
 (function() {
-          var html_page = 'h12-page',
+          var html_page = 'h3-page',
               link_change = true,
               redirect = true;
          
@@ -980,28 +1139,28 @@ $(function () {
                 admButton = true;
 
             if (_userdata.user_level === 1 && admButton === true) {
-                $("#text_editor_textarea").before("<a class='note-btn mod-b'>تنبيه القسم</a>");
+                $("#text_editor_textarea").before("<a class='note-btn mod-b'>تنبيه التكرار</a>");
                 $('.mod-b').click(function () {
-                    $('#text_editor_textarea').sceditor('instance').insertText('[wrong]', '[/wrong]')
+                    $('#text_editor_textarea').sceditor('instance').insertText('[norepeat]يبدو أن اعلانك على ما يرام لكن !! ، لاحظ الفريق أن هذا الاعلان مكرر و سبق أن قمت باضافته من قبل . لا تقلق سنكتفي بتنبيهك يرجى الحذر في المرة القادمة حتى لا يتعرض حسابك للايقاف و حذف كافة الاعلانات الخاصة بك ، كما يمكنك الاطلاع على القوانين من [url=http://www.koutstore.com/t15820-topic]هنا [/url]للتاكد من أن اعلانك سليم و غير مخالف لقوانين الشبكة[/norepeat]')
                 });
             }
             if (_userdata.user_level === 1 && admButton === true) {
-                $("#text_editor_textarea").before("<a class='note-btn not-b'>تنبيه التكرار</a>");
+                $("#text_editor_textarea").before("<a class='note-btn not-b'>تنبيه القسم</a>");
                 $('.not-b').click(function () {
-                    $('#text_editor_textarea').sceditor('instance').insertText('[norepeat][/norepeat]')
+                    $('#text_editor_textarea').sceditor('instance').insertText('[wrong]اعلان رائع لكن !! ، تم نقل الاعلان للقسم المناسب يرجى التأكد من القسم قبل اضافة أي اعلان في المرة القادمة ، كما يمكنك الاطلاع على القوانين من [url=http://www.koutstore.com/t15820-topic]هنا [/url]للتاكد من أن اعلانك سليم و غير مخالف لقوانين الشبكة[/wrong]')
                 });
             }
             if (_userdata.user_level === 1 && modButton === true) {
                 $("#text_editor_textarea").before("<a class='note-btn adm-b'>تنبيه الدولة</a>");
                 $('.adm-b').click(function () {
-                    $('#text_editor_textarea').sceditor('instance').insertText('[location]', '[/location]')
+                    $('#text_editor_textarea').sceditor('instance').insertText('[location]من معطيات الاعلان الخاصة بك تم اكتشاف أن اعلانك لا يتناسب مع المنطقة الجغرافية  لهذا النطاق ، يرجى الانتباه في المرات القادمة حتى لا  يتم حظر حسابك من  الخدمة[/location]')
                 });
             }
     
             $('div.postbody div').each(function () {
-                if ($(this).text().indexOf('[location]') != -1) $(this).html($(this).html().replace(/\[location\](.+?)\[\/location\]/gi, '<div class="mod_mess3"><div class="titl">Administrator Warning</div><div>$1 </div></div>'));
-                if ($(this).text().indexOf('[norepeat]') != -1) $(this).html($(this).html().replace(/\[norepeat\](.+?)\[\/norepeat\]/gi, '<div class="mod_mess1"><div class="titl">Moderator Warning</div><div>$1 </div></div>'));
-                if ($(this).text().indexOf('[wrong]') != -1) $(this).html($(this).html().replace(/\[wrong\](.+?)\[\/wrong\]/gi, '<div class="mod_mess2"><div class="titl">Moderator Warning</div><div>$1 </div></div>'));
+                if ($(this).text().indexOf('[location]') != -1) $(this).html($(this).html().replace(/\[location\](.+?)\[\/location\]/gi, '<div class="mod_mess3"><div class="titl">تحذير : خطأ في اختيار الدولة</div><div>$1 </div></div>'));
+                if ($(this).text().indexOf('[wrong]') != -1) $(this).html($(this).html().replace(/\[wrong\](.+?)\[\/wrong\]/gi, '<div class="mod_mess1"><div class="titl">تنبيه متعلق  باختيار القسم</div><div>$1 </div></div>'));
+                if ($(this).text().indexOf('[norepeat]') != -1) $(this).html($(this).html().replace(/\[norepeat\](.+?)\[\/norepeat\]/gi, '<div class="mod_mess2"><div class="titl">تحذير بخصوص التكرار</div><div>$1 </div></div>'));
             });
         });
 
@@ -1028,10 +1187,427 @@ $(function () {
 
 /* force WYSIWYG */
 
-$(function() {$(function() {
-  var instance = $('#text_editor_textarea').sceditor('instance');
- 
-  if (instance.inSourceMode()) {
-    instance.toggleSourceMode();
-  }
-})});
+        $(function() {
+          $(function() {
+            if (!$.sceditor) return;
+            var instance = $('#text_editor_textarea').sceditor('instance');
+            if (instance.inSourceMode()) {
+              instance.toggleSourceMode()
+            }
+          })
+        });
+
+
+
+/* -- mintion search  -- */
+        !window.fa_mentionner && !/\/privmsg|\/profile\?mode=editprofile&page_profil=signature/.test(window.location.href) && $(function(){$(function(){
+          'SCEDITOR @HANDLE AUTO-SUGGEST';
+          'DEVELOPED BY ANGE TUTEUR';
+          'NO DISTRIBUTION WITHOUT CONSENT OF THE AUTHOR';
+          'ORIGIN : http://fmdesign.forumotion.com/t943-auto-suggest-mentions-as-you-type#19157';
+         
+          var container = $('.sceditor-container')[0],
+              text_editor = document.getElementById('text_editor_textarea'),
+              frame,
+              instance;
+         
+          if (container && text_editor) {
+         
+            frame = $('iframe', container);
+            instance = $(text_editor).sceditor('instance');
+         
+            window.fa_mentionner = {
+              suggest_delay : 100, // delay before suggestions show up (100ms)
+         
+              // language presets
+              lang : {
+                placeholder : 'Searching...',
+                not_found : 'User not found'
+              },
+         
+              // colors of the suggestion popup
+              color : {
+                      font : '#333',
+                hover_font : '#FFF',
+                error_font : '#F00',
+         
+                      background : '#FFF',
+                hover_background : '#69C',
+         
+                border : '#CCC',
+                shadow : 'rgba(0, 0, 0, 0.176)'
+              },
+         
+              // sceditor instance and rangeHelper
+              instance : instance,
+              rangeHelper : instance.getRangeHelper(),
+         
+              // cached nodes for listening and modifications
+              frame : frame[0],
+              body : frame.contents().find('body')[0],
+              textarea : $('textarea', container)[0],
+         
+              // faux textarea and suggestion list
+              faux_textarea : $('<div id="faux_text_editor" />')[0], // helps us mirror the cursor position in source mode
+              list : $('<div id="fa_mention_suggestions" style="position:absolute;" />')[0],
+         
+              // version specific selectors
+              selectors : $('.bodyline')[0] ? ['a.gen[href^="/u"]', '.avatar.mini a'] :
+                          document.getElementById('ipbwrapper') ? ['.membername', '.mini-avatar'] :
+                          null,
+         
+         
+              // adjusts the scroll position of the faux textarea so the caret stays in line
+              adjustScroll : function() {
+                fa_mentionner.faux_textarea.scrollTop = fa_mentionner.textarea.scrollTop;
+              },
+         
+         
+              // updates the content in the faux textarea
+              updateFauxTextarea : function(active, key) {
+                if (key == 16) { // 16 = SHIFT
+                  return; // return when specific keys are pressed
+                }
+         
+                // clear suggestion queue when suggestions aren't active
+                if (active != true) {
+                  fa_mentionner.clearSuggestions();
+                } else {
+                  return; // return when interactive keys are pressed while suggesting ; up, down, enter
+                }
+         
+                // use another method if in WYSIWYG mode
+                if (!fa_mentionner.instance.inSourceMode()) {
+                  key != 32 ? fa_mentionner.searchWYSIWYG() : fa_mentionner.clearSuggestions();
+                  return;
+                }
+         
+                var val = fa_mentionner.instance.val(),
+                    range = 0,
+                    selection,
+                    faux_caret,
+                    username;
+         
+                // get the position of the caret
+                if (document.selection) {
+                  selection = document.selection.createRange();
+                  selection.moveStart('character', -fa_mentionner.textarea.length);
+                  range = selection.text.length;
+                } else if (fa_mentionner.textarea.selectionStart || fa_mentionner.textarea.selectionStart == 0) {
+                  range = fa_mentionner.textarea.selectionStart;
+                }
+         
+                // set the position of the caret
+                val = val.slice(0, range) + '{FAUX_CARET}' + val.slice(range, val.length);
+         
+                // parse and sanitize the faux textarea content
+                $(fa_mentionner.faux_textarea).html(
+                  val.replace(/</g, '<')
+                    .replace(/>/g, '>')
+                    .replace(/@"(.*?)"|@(.*?)(?:\s|\r|\n|$)/g, function(M, $1, $2) {
+                      var lastChar = M.substr(-1),
+                          name = ($1 || $2 || '').replace(/\{FAUX_CARET\}|"/g, '');
+         
+                      return '<a href="#' + name + '">' + (/\s|\r|\n/.test(M) ? M.slice(0, M.length - 1) + '</a>' + lastChar : M + '</a>');
+                    })
+                    .replace(/\{FAUX_CARET\}/, '<span id="faux_caret" style="position:absolute;margin-left:-3px;">|</span>')
+                );
+         
+                faux_caret = document.getElementById('faux_caret');
+         
+                // mentions are parsed as <a>nchors, so when the faux caret is inside one we'll show some suggestions
+                if (faux_caret && faux_caret.parentNode.tagName == 'A') {
+                  fa_mentionner.value = val;
+         
+                  fa_mentionner.delay = window.setTimeout(function() {
+                    fa_mentionner.suggest(faux_caret.parentNode.href.replace(/.*?#(.*)/, '$1'), $(faux_caret).offset());
+                  }, fa_mentionner.suggest_delay);
+         
+                }
+         
+                fa_mentionner.adjustScroll();
+              },
+         
+         
+              // search for active mentions in wysiwyg mode
+              searchWYSIWYG : function() {
+                var selected = fa_mentionner.rangeHelper.cloneSelected(),
+                    mentions = selected.startContainer.data && selected.startContainer.data.match(/(@".*?")|(@.*?)(?:\s|\r|\n|$)/g),
+                    offset,
+                    offset_marker,
+                    hit,
+                    i;
+         
+                    console.log(mentions);
+         
+                if (mentions && mentions[0]) {
+         
+                  // clean up whitespace
+                  for (i in mentions) {
+                    mentions[i] = mentions[i].replace(/\s$/g, '');
+                  }
+         
+                  // search for the mention that's currently being modified
+                  for (i in mentions) {
+                    if (!fa_mentionner.wysiwyg_mentions || (mentions[i] != fa_mentionner.wysiwyg_mentions[i])) {
+                      hit = true;
+         
+                      fa_mentionner.delay = window.setTimeout(function() {
+                        fa_mentionner.rangeHelper.insertMarkers(); // insert markers to help get the caret offset
+         
+                        offset = $(fa_mentionner.frame).offset();
+                        offset_marker = $('#sceditor-end-marker', fa_mentionner.body).show().offset();
+         
+                        // add the marker offsets to the iframe offsets
+                        offset.left += offset_marker.left;
+                        offset.top += offset_marker.top - fa_mentionner.body.scrollTop;
+         
+                        fa_mentionner.suggest(mentions[i].slice(1).replace(/^"|"$/g, ''), offset, true);
+                        fa_mentionner.wysiwyg_active = mentions[i]; // save the active mention for later use in finish()
+                      }, fa_mentionner.suggest_delay);
+         
+                      break;
+                    }
+                  }
+         
+                  // hide the suggestion list if there's no newly modified mentions
+                  if (!hit) {
+                    fa_mentionner.list.style.display = 'none';
+                    fa_mentionner.focused = null;
+                  }
+         
+                  fa_mentionner.wysiwyg_mentions = mentions; // update the list of mentions
+         
+                }
+              },
+         
+              // suggest a list of users based on the passed username
+              suggest : function(username, offset, wysiwyg) {
+         
+                // insert the suggestion list to show that it's searching
+                fa_mentionner.list.innerHTML = '<span class="fam-info">' + fa_mentionner.lang.placeholder + '</span>';
+                $(fa_mentionner.list).css({
+                  left : offset.left + 'px',
+                  top : offset.top + 'px',
+                  display : 'block',
+                  overflowY : 'auto'
+                });
+         
+                document.body.appendChild(fa_mentionner.list);
+         
+                // send a query request to the memeberlist to find users who match the typed username
+                fa_mentionner.request = $.get('/memberlist?username=' + username, function(d) {
+                  fa_mentionner.request = null;
+         
+                  var suggestion = $(fa_mentionner.selectors ? fa_mentionner.selectors[0] : '.avatar-mini a', d),
+                      ava = fa_mentionner.selectors ? $(fa_mentionner.selectors[1], d) : null,
+                      i = 0,
+                      j = suggestion.length,
+                      name;
+         
+                  fa_mentionner.list.innerHTML = '';
+         
+                  if (j) {
+                    for (; i < j; i++) {
+                      name = $(suggestion[i]).text().replace(/^\s+|\s+$/g, '');
+         
+                      fa_mentionner.list.insertAdjacentHTML('beforeend',
+                        '<a href="javascript:fa_mentionner.finish(\'' + name.replace(/'/g, '\\\'') + '\', ' + wysiwyg + ');" class="fa_mention_suggestion">'+
+                          '<img class="fa_suggested_avatar" src="' + $(fa_mentionner.selectors ? ava[i] : suggestion[i]).find('img').attr('src') + '"/>'+
+                          '<span class="fa_suggested_name">' + name + '</span>'+
+                        '</a>'
+                      );
+                    }
+         
+                    // change overflowY property when it exceeds 7 suggestions -- prevents unsightly scroll bug
+                    fa_mentionner.list.style.overflowY = j > 7 ? 'scroll' : 'auto';
+         
+                    // update the focused suggestion and scroll it into view
+                    fa_mentionner.list.firstChild.className += ' fam-focus';
+                    fa_mentionner.focused = fa_mentionner.list.firstChild;
+                    fa_mentionner.scrollSuggestions();
+         
+                  } else {
+                    fa_mentionner.list.innerHTML = '<span class="fam-info" style="color:' + fa_mentionner.color.error_font + ';">' + fa_mentionner.lang.not_found + '</span>';
+                  }
+         
+                });
+              },
+         
+         
+              // kill the suggestion timeout while typing persists
+              clearSuggestions : function() {
+                if (fa_mentionner.delay) {
+                  window.clearTimeout(fa_mentionner.delay);
+                  fa_mentionner.delay = null;
+         
+                  fa_mentionner.list.style.display = 'none';
+                  fa_mentionner.focused = null;
+                }
+         
+                if (fa_mentionner.request) {
+                  fa_mentionner.request.abort();
+                  fa_mentionner.request = null;
+                }
+              },
+         
+         
+              // finish the username
+              finish : function(username, wysiwyg) {
+                var mention, index, i;
+         
+                // hide and clear suggestions
+                fa_mentionner.clearSuggestions();
+                fa_mentionner.focused = null;
+                fa_mentionner.list.style.display = 'none';
+         
+                if (!wysiwyg) {
+                  fa_mentionner.value = fa_mentionner.value.replace(/(?:@".[^"]*?\{FAUX_CARET\}.*?"|@\{FAUX_CARET\}.*?(\s|\n|\r|$)|@.[^"\s]*?\{FAUX_CARET\}.*?(\s|\n|\r|$))/, function(M, $1, $2) {
+                    mention = '@"' + username + '"';
+                    return '{MENTION_POSITION}' + ( $1 ? $1 : $2 ? $2 : '' );
+                  });
+         
+                  // get the index where the mention should be
+                  index = fa_mentionner.value.indexOf('{MENTION_POSITION}');
+                  fa_mentionner.value = fa_mentionner.value.replace('{MENTION_POSITION}', '');
+         
+                  // save current scroll position for application after the value has been updated
+                  fa_mentionner.scrollIndex = fa_mentionner.textarea.scrollTop;
+         
+                  // update the textarea with the completed mention
+                  fa_mentionner.instance.val('');
+                  fa_mentionner.instance.insert(fa_mentionner.value.slice(0, index) + mention, fa_mentionner.value.slice(index, fa_mentionner.value.length));
+         
+                  // restore the scroll position for the textareas
+                  fa_mentionner.textarea.scrollTop = fa_mentionner.scrollIndex;
+                  fa_mentionner.adjustScroll();
+         
+                  // update the fake textarea
+                  fa_mentionner.updateFauxTextarea();
+         
+                } else {
+                  // save the caret range in WYSIWYG so we can restore it after replacing the HTML
+                  fa_mentionner.rangeHelper.saveRange();
+                  fa_mentionner.body.innerHTML = fa_mentionner.body.innerHTML.replace(new RegExp(fa_mentionner.wysiwyg_active.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + '(<span.*?id="sceditor-end-marker".*?>)'), '@"' + username + '"$1');
+                  fa_mentionner.body.focus();
+                  fa_mentionner.rangeHelper.restoreRange();
+         
+                  // update the wysiwyg mention array so no new suggestions appear
+                  for (i in fa_mentionner.wysiwyg_mentions) {
+                    if (fa_mentionner.wysiwyg_mentions[i] == fa_mentionner.wysiwyg_active) {
+                      fa_mentionner.wysiwyg_mentions[i] = '@"' + username + '"';
+                      break;
+                    }
+                  }
+                }
+              },
+         
+         
+              // scroll the selected suggestion into view
+              scrollSuggestions : function() {
+                $(fa_mentionner.list).scrollTop(
+                  (
+                    $(fa_mentionner.focused).offset().top -
+                    $(fa_mentionner.list).offset().top +
+                    $(fa_mentionner.list).scrollTop()
+                  ) -
+         
+                  (26 * 3) // 26 = the height of the suggestions, so display 3 suggestions above while scrolling
+                );
+              }
+            };
+         
+            // get computed styles for the textarea and apply them to the faux textarea
+            for (var css = window.getComputedStyle(fa_mentionner.textarea, null), i = 0, j = css.length, str = ''; i < j; i++) {
+              str += css[i] + ':'  + css.getPropertyValue(css[i]) + ';';
+            }
+         
+            // add styles to the head
+            $('head').append('<style type="text/css">'+
+              '#faux_text_editor {' + str + '}'+
+              '#faux_text_editor { position:absolute; left:0; bottom:0; z-index:-1; visibility:hidden; display:block; overflow-y:auto; }'+
+              '#fa_mention_suggestions { color:' + fa_mentionner.color.font + '; font-size:10px; font-family:arial, verdana, sans-serif; background:' + fa_mentionner.color.background + '; border:1px solid ' + fa_mentionner.color.border + '; margin-top:20px; z-index:999; max-height:182px; overflow-x:hidden; box-shadow:0 6px 12px ' + fa_mentionner.color.shadow + '; }'+
+              'a.fa_mention_suggestion, .fam-info { color:' + fa_mentionner.color.font + '; height:26px; line-height:26px; padding:0 3px; display:block; white-space:nowrap; cursor:pointer; }'+
+              'a.fa_mention_suggestion.fam-focus { color:' + fa_mentionner.color.hover_font + '; background:' + fa_mentionner.color.hover_background + '; }'+
+              '.fa_suggested_avatar { height:20px; width:20px; vertical-align:middle; margin-right:3px; }'+
+            '</style>');
+         
+            // insert faux textarea into document
+            fa_mentionner.textarea.parentNode.insertBefore(fa_mentionner.faux_textarea, fa_mentionner.textarea);
+         
+            // apply event handlers
+            fa_mentionner.textarea.onclick = fa_mentionner.updateFauxTextarea;
+            fa_mentionner.textarea.onscroll = fa_mentionner.adjustScroll;
+         
+            // update the faux textarea on keyup
+            fa_mentionner.instance.keyUp(function(e) {
+              if (fa_mentionner.focused && e && (e.keyCode == 13 || e.keyCode == 38 || e.keyCode == 40)) {
+                fa_mentionner.updateFauxTextarea(true, e.keyCode);
+                return false;
+              } else {
+                fa_mentionner.updateFauxTextarea(false, e.keyCode);
+              }
+            });
+         
+            // key events for the suggested mentions
+            $([document, fa_mentionner.body]).on('keydown', function(e) {
+              var that = e.target;
+         
+              if (fa_mentionner.focused && e && e.keyCode && (that.tagName == 'TEXTAREA' || that.tagName == 'BODY')) {
+         
+                // move selection down
+                if (e.keyCode == 40) {
+                  var next = fa_mentionner.focused.nextSibling;
+         
+                  if (next) {
+                    $(fa_mentionner.focused).removeClass('fam-focus');
+                    next.className += ' fam-focus';
+                    fa_mentionner.focused = next;
+         
+                    fa_mentionner.scrollSuggestions();
+                  }
+         
+                  return false;
+                }
+         
+                // move selection up
+                if (e.keyCode == 38) {
+                  var prev = fa_mentionner.focused.previousSibling;
+         
+                  if (prev) {
+                    $(fa_mentionner.focused).removeClass('fam-focus');
+                    prev.className += ' fam-focus';
+                    fa_mentionner.focused = prev;
+         
+                    fa_mentionner.scrollSuggestions();
+                  }
+         
+                  return false;
+                }
+         
+                // apply selection
+                if (e.keyCode == 13) {
+                  fa_mentionner.focused.click();
+                  return false;
+                }
+         
+              }
+            });
+         
+            // update focused suggestion on hover
+            $(document).on('mouseover', function(e) {
+              var that = e.target;
+         
+              if (/fa_mention_suggestion/.test(that.className)) {
+                $(fa_mentionner.focused).removeClass('fam-focus');
+                that.className += ' fam-focus';
+                fa_mentionner.focused = that;
+              }
+            });
+          }
+        })});
+
+
+/* alert */
+
+!function(e,t,n){"use strict";!function o(e,t,n){function a(s,l){if(!t[s]){if(!e[s]){var i="function"==typeof require&&require;if(!l&&i)return i(s,!0);if(r)return r(s,!0);var u=new Error("Cannot find module '"+s+"'");throw u.code="MODULE_NOT_FOUND",u}var c=t[s]={exports:{}};e[s][0].call(c.exports,function(t){var n=e[s][1][t];return a(n?n:t)},c,c.exports,o,e,t,n)}return t[s].exports}for(var r="function"==typeof require&&require,s=0;s<n.length;s++)a(n[s]);return a}({1:[function(o,a,r){var s=function(e){return e&&e.__esModule?e:{"default":e}};Object.defineProperty(r,"__esModule",{value:!0});var l,i,u,c,d=o("./modules/handle-dom"),f=o("./modules/utils"),p=o("./modules/handle-swal-dom"),m=o("./modules/handle-click"),v=o("./modules/handle-key"),y=s(v),h=o("./modules/default-params"),b=s(h),g=o("./modules/set-params"),w=s(g);r["default"]=u=c=function(){function o(e){var t=a;return t[e]===n?b["default"][e]:t[e]}var a=arguments[0];if(d.addClass(t.body,"stop-scrolling"),p.resetInput(),a===n)return f.logStr("SweetAlert expects at least 1 attribute!"),!1;var r=f.extend({},b["default"]);switch(typeof a){case"string":r.title=a,r.text=arguments[1]||"",r.type=arguments[2]||"";break;case"object":if(a.title===n)return f.logStr('Missing "title" argument!'),!1;r.title=a.title;for(var s in b["default"])r[s]=o(s);r.confirmButtonText=r.showCancelButton?"Confirm":b["default"].confirmButtonText,r.confirmButtonText=o("confirmButtonText"),r.doneFunction=arguments[1]||null;break;default:return f.logStr('Unexpected type of argument! Expected "string" or "object", got '+typeof a),!1}w["default"](r),p.fixVerticalPosition(),p.openModal(arguments[1]);for(var u=p.getModal(),v=u.querySelectorAll("button"),h=["onclick","onmouseover","onmouseout","onmousedown","onmouseup","onfocus"],g=function(e){return m.handleButton(e,r,u)},C=0;C<v.length;C++)for(var S=0;S<h.length;S++){var x=h[S];v[C][x]=g}p.getOverlay().onclick=g,l=e.onkeydown;var k=function(e){return y["default"](e,r,u)};e.onkeydown=k,e.onfocus=function(){setTimeout(function(){i!==n&&(i.focus(),i=n)},0)},c.enableButtons()},u.setDefaults=c.setDefaults=function(e){if(!e)throw new Error("userParams is required");if("object"!=typeof e)throw new Error("userParams has to be a object");f.extend(b["default"],e)},u.close=c.close=function(){var o=p.getModal();d.fadeOut(p.getOverlay(),5),d.fadeOut(o,5),d.removeClass(o,"showSweetAlert"),d.addClass(o,"hideSweetAlert"),d.removeClass(o,"visible");var a=o.querySelector(".sa-icon.sa-success");d.removeClass(a,"animate"),d.removeClass(a.querySelector(".sa-tip"),"animateSuccessTip"),d.removeClass(a.querySelector(".sa-long"),"animateSuccessLong");var r=o.querySelector(".sa-icon.sa-error");d.removeClass(r,"animateErrorIcon"),d.removeClass(r.querySelector(".sa-x-mark"),"animateXMark");var s=o.querySelector(".sa-icon.sa-warning");return d.removeClass(s,"pulseWarning"),d.removeClass(s.querySelector(".sa-body"),"pulseWarningIns"),d.removeClass(s.querySelector(".sa-dot"),"pulseWarningIns"),setTimeout(function(){var e=o.getAttribute("data-custom-class");d.removeClass(o,e)},300),d.removeClass(t.body,"stop-scrolling"),e.onkeydown=l,e.previousActiveElement&&e.previousActiveElement.focus(),i=n,clearTimeout(o.timeout),!0},u.showInputError=c.showInputError=function(e){var t=p.getModal(),n=t.querySelector(".sa-input-error");d.addClass(n,"show");var o=t.querySelector(".sa-error-container");d.addClass(o,"show"),o.querySelector("p").innerHTML=e,setTimeout(function(){u.enableButtons()},1),t.querySelector("input").focus()},u.resetInputError=c.resetInputError=function(e){if(e&&13===e.keyCode)return!1;var t=p.getModal(),n=t.querySelector(".sa-input-error");d.removeClass(n,"show");var o=t.querySelector(".sa-error-container");d.removeClass(o,"show")},u.disableButtons=c.disableButtons=function(){var e=p.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!0,n.disabled=!0},u.enableButtons=c.enableButtons=function(){var e=p.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!1,n.disabled=!1},"undefined"!=typeof e?e.sweetAlert=e.swal=u:f.logStr("SweetAlert is a frontend module!"),a.exports=r["default"]},{"./modules/default-params":2,"./modules/handle-click":3,"./modules/handle-dom":4,"./modules/handle-key":5,"./modules/handle-swal-dom":6,"./modules/set-params":8,"./modules/utils":9}],2:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o={title:"",text:"",type:null,allowOutsideClick:!1,showConfirmButton:!0,showCancelButton:!1,closeOnConfirm:!0,closeOnCancel:!0,confirmButtonText:"موافق",confirmButtonColor:"#8CD4F5",cancelButtonText:"الغاء",imageUrl:null,imageSize:null,timer:null,customClass:"",html:!1,animation:!0,allowEscapeKey:!0,inputType:"text",inputPlaceholder:"",inputValue:"",showLoaderOnConfirm:!1};n["default"]=o,t.exports=n["default"]},{}],3:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=t("./utils"),r=(t("./handle-swal-dom"),t("./handle-dom")),s=function(t,n,o){function s(e){m&&n.confirmButtonColor&&(p.style.backgroundColor=e)}var u,c,d,f=t||e.event,p=f.target||f.srcElement,m=-1!==p.className.indexOf("confirm"),v=-1!==p.className.indexOf("sweet-overlay"),y=r.hasClass(o,"visible"),h=n.doneFunction&&"true"===o.getAttribute("data-has-done-function");switch(m&&n.confirmButtonColor&&(u=n.confirmButtonColor,c=a.colorLuminance(u,-.04),d=a.colorLuminance(u,-.14)),f.type){case"mouseover":s(c);break;case"mouseout":s(u);break;case"mousedown":s(d);break;case"mouseup":s(c);break;case"focus":var b=o.querySelector("button.confirm"),g=o.querySelector("button.cancel");m?g.style.boxShadow="none":b.style.boxShadow="none";break;case"click":var w=o===p,C=r.isDescendant(o,p);if(!w&&!C&&y&&!n.allowOutsideClick)break;m&&h&&y?l(o,n):h&&y||v?i(o,n):r.isDescendant(o,p)&&"BUTTON"===p.tagName&&sweetAlert.close()}},l=function(e,t){var n=!0;r.hasClass(e,"show-input")&&(n=e.querySelector("input").value,n||(n="")),t.doneFunction(n),t.closeOnConfirm&&sweetAlert.close(),t.showLoaderOnConfirm&&sweetAlert.disableButtons()},i=function(e,t){var n=String(t.doneFunction).replace(/\s/g,""),o="function("===n.substring(0,9)&&")"!==n.substring(9,10);o&&t.doneFunction(!1),t.closeOnCancel&&sweetAlert.close()};o["default"]={handleButton:s,handleConfirm:l,handleCancel:i},n.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],4:[function(n,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=function(e,t){return new RegExp(" "+t+" ").test(" "+e.className+" ")},s=function(e,t){r(e,t)||(e.className+=" "+t)},l=function(e,t){var n=" "+e.className.replace(/[\t\r\n]/g," ")+" ";if(r(e,t)){for(;n.indexOf(" "+t+" ")>=0;)n=n.replace(" "+t+" "," ");e.className=n.replace(/^\s+|\s+$/g,"")}},i=function(e){var n=t.createElement("div");return n.appendChild(t.createTextNode(e)),n.innerHTML},u=function(e){e.style.opacity="",e.style.display="block"},c=function(e){if(e&&!e.length)return u(e);for(var t=0;t<e.length;++t)u(e[t])},d=function(e){e.style.opacity="",e.style.display="none"},f=function(e){if(e&&!e.length)return d(e);for(var t=0;t<e.length;++t)d(e[t])},p=function(e,t){for(var n=t.parentNode;null!==n;){if(n===e)return!0;n=n.parentNode}return!1},m=function(e){e.style.left="-9999px",e.style.display="block";var t,n=e.clientHeight;return t="undefined"!=typeof getComputedStyle?parseInt(getComputedStyle(e).getPropertyValue("padding-top"),10):parseInt(e.currentStyle.padding),e.style.left="",e.style.display="none","-"+parseInt((n+t)/2)+"px"},v=function(e,t){if(+e.style.opacity<1){t=t||16,e.style.opacity=0,e.style.display="block";var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity+(new Date-n)/100,n=+new Date,+e.style.opacity<1&&setTimeout(o,t)});o()}e.style.display="block"},y=function(e,t){t=t||16,e.style.opacity=1;var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity-(new Date-n)/100,n=+new Date,+e.style.opacity>0?setTimeout(o,t):e.style.display="none"});o()},h=function(n){if("function"==typeof MouseEvent){var o=new MouseEvent("click",{view:e,bubbles:!1,cancelable:!0});n.dispatchEvent(o)}else if(t.createEvent){var a=t.createEvent("MouseEvents");a.initEvent("click",!1,!1),n.dispatchEvent(a)}else t.createEventObject?n.fireEvent("onclick"):"function"==typeof n.onclick&&n.onclick()},b=function(t){"function"==typeof t.stopPropagation?(t.stopPropagation(),t.preventDefault()):e.event&&e.event.hasOwnProperty("cancelBubble")&&(e.event.cancelBubble=!0)};a.hasClass=r,a.addClass=s,a.removeClass=l,a.escapeHtml=i,a._show=u,a.show=c,a._hide=d,a.hide=f,a.isDescendant=p,a.getTopMargin=m,a.fadeIn=v,a.fadeOut=y,a.fireClick=h,a.stopEventPropagation=b},{}],5:[function(t,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=t("./handle-dom"),s=t("./handle-swal-dom"),l=function(t,o,a){var l=t||e.event,i=l.keyCode||l.which,u=a.querySelector("button.confirm"),c=a.querySelector("button.cancel"),d=a.querySelectorAll("button[tabindex]");if(-1!==[9,13,32,27].indexOf(i)){for(var f=l.target||l.srcElement,p=-1,m=0;m<d.length;m++)if(f===d[m]){p=m;break}9===i?(f=-1===p?u:p===d.length-1?d[0]:d[p+1],r.stopEventPropagation(l),f.focus(),o.confirmButtonColor&&s.setFocusStyle(f,o.confirmButtonColor)):13===i?("INPUT"===f.tagName&&(f=u,u.focus()),f=-1===p?u:n):27===i&&o.allowEscapeKey===!0?(f=c,r.fireClick(f,l)):f=n}};a["default"]=l,o.exports=a["default"]},{"./handle-dom":4,"./handle-swal-dom":6}],6:[function(n,o,a){var r=function(e){return e&&e.__esModule?e:{"default":e}};Object.defineProperty(a,"__esModule",{value:!0});var s=n("./utils"),l=n("./handle-dom"),i=n("./default-params"),u=r(i),c=n("./injected-html"),d=r(c),f=".sweet-alert",p=".sweet-overlay",m=function(){var e=t.createElement("div");for(e.innerHTML=d["default"];e.firstChild;)t.body.appendChild(e.firstChild)},v=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){var e=t.querySelector(f);return e||(m(),e=v()),e}),y=function(){var e=v();return e?e.querySelector("input"):void 0},h=function(){return t.querySelector(p)},b=function(e,t){var n=s.hexToRgb(t);e.style.boxShadow="0 0 2px rgba("+n+", 0.8), inset 0 0 0 1px rgba(0, 0, 0, 0.05)"},g=function(n){var o=v();l.fadeIn(h(),10),l.show(o),l.addClass(o,"showSweetAlert"),l.removeClass(o,"hideSweetAlert"),e.previousActiveElement=t.activeElement;var a=o.querySelector("button.confirm");a.focus(),setTimeout(function(){l.addClass(o,"visible")},500);var r=o.getAttribute("data-timer");if("null"!==r&&""!==r){var s=n;o.timeout=setTimeout(function(){var e=(s||null)&&"true"===o.getAttribute("data-has-done-function");e?s(null):sweetAlert.close()},r)}},w=function(){var e=v(),t=y();l.removeClass(e,"show-input"),t.value=u["default"].inputValue,t.setAttribute("type",u["default"].inputType),t.setAttribute("placeholder",u["default"].inputPlaceholder),C()},C=function(e){if(e&&13===e.keyCode)return!1;var t=v(),n=t.querySelector(".sa-input-error");l.removeClass(n,"show");var o=t.querySelector(".sa-error-container");l.removeClass(o,"show")},S=function(){var e=v();e.style.marginTop=l.getTopMargin(v())};a.sweetAlertInitialize=m,a.getModal=v,a.getOverlay=h,a.getInput=y,a.setFocusStyle=b,a.openModal=g,a.resetInput=w,a.resetInputError=C,a.fixVerticalPosition=S},{"./default-params":2,"./handle-dom":4,"./injected-html":7,"./utils":9}],7:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o='<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert"><div class="sa-icon sa-error">\n      <span class="sa-x-mark">\n        <span class="sa-line sa-left"></span>\n        <span class="sa-line sa-right"></span>\n      </span>\n    </div><div class="sa-icon sa-warning">\n      <span class="sa-body"></span>\n      <span class="sa-dot"></span>\n    </div><div class="sa-icon sa-info"></div><div class="sa-icon sa-success">\n      <span class="sa-line sa-tip"></span>\n      <span class="sa-line sa-long"></span>\n\n      <div class="sa-placeholder"></div>\n      <div class="sa-fix"></div>\n    </div><div class="sa-icon sa-custom"></div><h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input type="text" tabIndex="3" />\n      <div class="sa-input-error"></div>\n    </fieldset><div class="sa-error-container">\n      <div class="icon">!</div>\n      <p>Not valid!</p>\n    </div><div class="sa-button-container">\n      <button class="cancel" tabIndex="2">Cancel</button>\n      <div class="sa-confirm-button-container">\n        <button class="confirm" tabIndex="1">OK</button><div class="la-ball-fall">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div></div>';n["default"]=o,t.exports=n["default"]},{}],8:[function(e,t,o){Object.defineProperty(o,"__esModule",{value:!0});var a=e("./utils"),r=e("./handle-swal-dom"),s=e("./handle-dom"),l=["error","warning","info","success","input","prompt"],i=function(e){var t=r.getModal(),o=t.querySelector("h2"),i=t.querySelector("p"),u=t.querySelector("button.cancel"),c=t.querySelector("button.confirm");if(o.innerHTML=e.html?e.title:s.escapeHtml(e.title).split("\n").join("<br>"),i.innerHTML=e.html?e.text:s.escapeHtml(e.text||"").split("\n").join("<br>"),e.text&&s.show(i),e.customClass)s.addClass(t,e.customClass),t.setAttribute("data-custom-class",e.customClass);else{var d=t.getAttribute("data-custom-class");s.removeClass(t,d),t.setAttribute("data-custom-class","")}if(s.hide(t.querySelectorAll(".sa-icon")),e.type&&!a.isIE8()){var f=function(){for(var o=!1,a=0;a<l.length;a++)if(e.type===l[a]){o=!0;break}if(!o)return logStr("Unknown alert type: "+e.type),{v:!1};var i=["success","error","warning","info"],u=n;-1!==i.indexOf(e.type)&&(u=t.querySelector(".sa-icon.sa-"+e.type),s.show(u));var c=r.getInput();switch(e.type){case"success":s.addClass(u,"animate"),s.addClass(u.querySelector(".sa-tip"),"animateSuccessTip"),s.addClass(u.querySelector(".sa-long"),"animateSuccessLong");break;case"error":s.addClass(u,"animateErrorIcon"),s.addClass(u.querySelector(".sa-x-mark"),"animateXMark");break;case"warning":s.addClass(u,"pulseWarning"),s.addClass(u.querySelector(".sa-body"),"pulseWarningIns"),s.addClass(u.querySelector(".sa-dot"),"pulseWarningIns");break;case"input":case"prompt":c.setAttribute("type",e.inputType),c.value=e.inputValue,c.setAttribute("placeholder",e.inputPlaceholder),s.addClass(t,"show-input"),setTimeout(function(){c.focus(),c.addEventListener("keyup",swal.resetInputError)},400)}}();if("object"==typeof f)return f.v}if(e.imageUrl){var p=t.querySelector(".sa-icon.sa-custom");p.style.backgroundImage="url("+e.imageUrl+")",s.show(p);var m=80,v=80;if(e.imageSize){var y=e.imageSize.toString().split("x"),h=y[0],b=y[1];h&&b?(m=h,v=b):logStr("Parameter imageSize expects value with format WIDTHxHEIGHT, got "+e.imageSize)}p.setAttribute("style",p.getAttribute("style")+"width:"+m+"px; height:"+v+"px")}t.setAttribute("data-has-cancel-button",e.showCancelButton),e.showCancelButton?u.style.display="inline-block":s.hide(u),t.setAttribute("data-has-confirm-button",e.showConfirmButton),e.showConfirmButton?c.style.display="inline-block":s.hide(c),e.cancelButtonText&&(u.innerHTML=s.escapeHtml(e.cancelButtonText)),e.confirmButtonText&&(c.innerHTML=s.escapeHtml(e.confirmButtonText)),e.confirmButtonColor&&(c.style.backgroundColor=e.confirmButtonColor,c.style.borderLeftColor=e.confirmLoadingButtonColor,c.style.borderRightColor=e.confirmLoadingButtonColor,r.setFocusStyle(c,e.confirmButtonColor)),t.setAttribute("data-allow-outside-click",e.allowOutsideClick);var g=e.doneFunction?!0:!1;t.setAttribute("data-has-done-function",g),e.animation?"string"==typeof e.animation?t.setAttribute("data-animation",e.animation):t.setAttribute("data-animation","pop"):t.setAttribute("data-animation","none"),t.setAttribute("data-timer",e.timer)};o["default"]=i,t.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],9:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);return e},r=function(e){var t=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);return t?parseInt(t[1],16)+", "+parseInt(t[2],16)+", "+parseInt(t[3],16):null},s=function(){return e.attachEvent&&!e.addEventListener},l=function(t){e.console&&e.console.log("SweetAlert: "+t)},i=function(e,t){e=String(e).replace(/[^0-9a-f]/gi,""),e.length<6&&(e=e[0]+e[0]+e[1]+e[1]+e[2]+e[2]),t=t||0;var n,o,a="#";for(o=0;3>o;o++)n=parseInt(e.substr(2*o,2),16),n=Math.round(Math.min(Math.max(0,n+n*t),255)).toString(16),a+=("00"+n).substr(n.length);return a};o.extend=a,o.hexToRgb=r,o.isIE8=s,o.logStr=l,o.colorLuminance=i},{}]},{},[1]),"function"==typeof define&&define.amd?define(function(){return sweetAlert}):"undefined"!=typeof module&&module.exports&&(module.exports=sweetAlert)}(window,document);
