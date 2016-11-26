@@ -1,9 +1,346 @@
-    <script src="{JS_DIR}extendedview.js" type="text/javascript"></script>
+     <script src="{JS_DIR}extendedview.js" type="text/javascript"></script>
 <!-- BEGIN switch_head -->
 <!-- END switch_head -->
 
 {ERROR_BOX}
+<!-- BEGIN switch_not_privmsg -->
+<style>
+    .buttonre {
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        padding-right: 30px;
+        padding-left: 70px;
+        position: relative;
+        background-color: #18A955;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+        -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ff123852,Positive=true)";
+        zoom: 1;
+        filter: progid: DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=1, Color=#ff123852, Positive=true);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=2,Color=#33000000,Positive=true)";
+        filter: progid: DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=2, Color=#33000000, Positive=true);
+    }
+    
+    .buttonre span {
+        position: absolute;
+        left: 0;
+        width: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .buttonre:hover span,
+    .buttonre.active span {
+        background-color: rgb(0, 102, 26);
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+    
+    .buttonre:active {
+        margin-top: 2px;
+        margin-bottom: 13px;
+        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+        -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true)";
+        filter: progid: DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=1, Color=#ccffffff, Positive=true);
+    }
+    
+    .buttonre:hover {
+        color: #fff;
+    }
+ 
+    
+    #term-msg .container {
+        position: fixed;
+        width: 95%;
+        height: 88%;
+        top: 4%;
+        background: #0AB2D7 url(https://i97.servimg.com/u/f97/19/14/82/76/oe9ce211.png) no-repeat 50% 100%;
+        box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        overflow: auto;
+        padding: 1%;
+        right: 2%;
+    }
+    
+    #term-msg {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 11111;
+        opacity: 1;
+        -webkit-transition: opacity 400ms ease-in;
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+    }
+    
+    #term-msg label {
+        color: white;
+    }
+    
+    #term-msg h3 {
+        font-size: 20px !important;
+        color: white;
+        text-shadow: 1px 2px #000
+    }
+    
+    #term-msg p {
+        font-size: 15px
+    }
+    
+    .btn-plain.btn-light-green {
+        background-image: none;
+        background-color: #00a323;
+        color: #EFEFEF;
+        text-shadow: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .btn-xlarge {
+        padding: 10px 20px;
+        font-size: 26px;
+        line-height: normal;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    
+    .btn-plain.btn-light-green:hover,
+    .btn-plain.btn-light-green:active,
+    .btn-plain.btn-light-green.active,
+    .btn-plain.btn-light-green.disabled,
+    .btn-plain.btn-light-green[disabled] {
+        color: #ffffff;
+        background-color: #00CA2C;
+        *background-color: #00CA2C;
+    }
+    
+    .frame-text {
+        background: rgba(83, 64, 64, 0.3);
+        border-radius: 4px;
+        padding: 10px;
+        margin: 8px;
+        text-shadow: initial;
+    }
+    
+    .marketing .col-lg-4 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .col-lg-4 {
+        float: right;
+        border: 1px solid transparent;
+    }
+    
+    .col-lg-4 {
+        width: 30%;
+        min-height: 306px;
+    }
+    
+    .go_live_after_checklist_div {
+        width: 93.4%;
+        background-color: rgba(0, 0, 0, .85);
+        text-align: center;
+        padding: 16px;
+        position: fixed;
+        bottom: 22px;
+        right: 26px;
+    }
+</style>
+<div id="term-msg">
+    <div class="container">
 
+        <div class="frame-text" style="color: white;font-size: 14px;">من أجل الاستمرار يجب عليك قراءة الشروط والأحكام والخصوصيه و الموافقة عليها
+            <br> قراءتك للشروط لن تستغرق لحظات و ستضمن لك اضافة اعلانك بطريقة صحيحة و تجنب حظر حسابك و ستساعدنا على الحفاظ على نظام و جودة الاعلانات داخل كوت ستور
+        </div>
+        <div class="col-lg-4  frame-text item_selfreview_checklist ">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/globe10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">المنطقة الجغرافية لاعلانك</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">يجب اضافة اعلانك في فرع الدولة الذي ينتمي اليه اعلانك </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+        <div class="col-lg-4  frame-text item_selfreview_checklist ">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/iconhe10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">القسم المناسب</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">يجب كتابة الاعلان فى القسم الرئيسى والقسم الفرعى المناسب والصحيح لتسهيل الوصول الى اعلانك وبالتالى جلب مشاهدات اكثر ، اضافة اعلانك بطريقة عشوائية قد تعرضك للطرد او حذف الاعلان </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/du1pli10.png">
+                <h3 class="text-muted">لا يُسمح بتكرار الإعلان نفسه أكثر من مره</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11"> يمنع منعا باتا تكرار نشر اعلانك . اعادة نشر اعلانك قد يعرضك للطرد الفوري و حذف كافة مشاركاتك ، يكفي اضافة اعلان واحد لكل منتج و التعديل على صفحة الاعلان اذا اردت التعديل على الاعلان او اضافة بعض المعلومات </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="clear"></div>
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/light_10.png">
+                <h3 class="text-muted">عنوان الاعلان</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">فكر في عنوان مختصر و واضح لاعلانك يدل على محتواه </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/polaro10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">الصور اصدق من الكلام </h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">كلما ارفقت صورا عديدة وجذابة وحقيقية للمنتج او الخدمة التى تبيعها كلما كان افضل وحصل على اهتمام ومشاهدات اكثر , ولكن احرص على ارفاق صورا حقيقية ذات اضاءة جيدة وواضحة التفاصيل </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/diplom10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">محتوى مختصر ودقيق </h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">قم بكتابة محتوى الاعلان بوصف السلعة او الخدمة وصفا دقيقا واضحا وصادقا , واحرص على ذكر مميزات السلعة او الخدمة ، اى تفاصيل مهمة وفاصلة فى عمليات البيع والشراء يجب ذكرها فى الاعلان و لا تنسى أن تجعله جذّاباً !</p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="clear"></div>
+
+
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/web-co10.png">
+                <h3 class="text-muted">كتابة الاعلان بنفسك داخل صندوق المحرر النصي</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">تجنب انشاء اعلان عن طريق النسخ و اللصق من مواقع اخرى (قد تؤدي لظهور أكواد التنسيق مما يشوه من شكل الاعلان و الاشراف له الحق في حذف الاعلان ). قم بكتابة تفاصيل الاعلان داخل المحرر بنفسك و لا تعتمد على نسخ اعلانك من مواقع اخرى</p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/hand-o10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">اعلانات السحر</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">اعلانات السحر و التنجيم و الروحانيات ممنوعة منعا باتا و سيتم التصدي لها بطرد العضوية و حظر ip المستخدم و حذف كافة مشاركات العضو</p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="col-lg-4  frame-text item_selfreview_checklist">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/advant10.png">
+                <i class="hidden-xs glyphicon glyphicon-chevron-left"></i>
+                <h3 class="text-muted">المعلومات الخاصة و البنكية</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">لا تدخل اي معلومات بنكية خاصة بحسابك و لا تشارك اي شخص اي معلومات حساسة خاصة بك </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+        <div class="clear"></div>
+
+
+        <div class="col-lg-4  frame-text item_selfreview_checklist" style="margin-bottom: 10%;">
+            <label>
+                <img src="https://i97.servimg.com/u/f97/19/14/82/76/valent10.png">
+                <h3 class="text-muted">اللهجات العامية والأخطاء الإملائية</h3>
+                <p class="col-md-10 col-md-push-1 col-xs-11">تجنب اللغات و اللهجات العامية والأخطاء الإملائية </p>
+                <input class="selfreview_checkbox" type="checkbox"> موافق على الالتزام بهذا البند
+            </label>
+        </div>
+
+
+        <div class="go_live_after_checklist_div">
+
+            <a name="golive_after_selfreview" id="golive_after_selfreview" class="btn-plain btn-light-green btn-xlarge  btn btn-success btn-xlarge">
+تم ، اذهب لكتابة الاعلان الان ! <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+</a>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+ 
+
+
+
+<script>
+ 
+    $(".close_selfreview_popup").click(function () {
+        hide_selfreview_popup();
+        $("#launcher").show();
+    });
+    $("#close_and_cancel_selfreview").click(function () {
+        hide_selfreview_popup();
+        $("#launcher").show();
+    });
+    $("#selfreview_overlay").click(function () {
+        hide_selfreview_popup();
+        $("#launcher").show();
+    });
+    $("#back_to_campaign_page").click(function () {
+        hide_selfreview_popup();
+    });
+    $(".item_selfreview_checklist").mouseover(function () {
+        $(this).find('.edit_self_reviewed').show();
+    });
+    $(".item_selfreview_checklist").mouseout(function () {
+        $(this).find('.edit_self_reviewed').hide();
+    });
+    $(".edit_self_reviewed").click(function () {
+        hide_selfreview_popup();
+    });
+    $(".selfreview_checkbox").click(function () {
+        if ($(this).is(":checked")) {
+            all_check = true;
+            $(this).closest('.item_selfreview_checklist').find(".selfreview_checkbox").each(function () {
+                if (!$(this).is(":checked")) {
+                    all_check = false;
+                }
+            });
+            if (all_check)
+                $(this).closest('.item_selfreview_checklist').css("border-color", "#00CA2C").css("background", "rgba(83, 64, 64, 0.57)");
+        } else {
+            $(this).closest('.item_selfreview_checklist').css("border-color", "#f00").css("background", "rgba(83, 64, 64, 0.3)");
+        }
+    });
+    $("#golive_after_selfreview").click(function () {
+        golive_is_allowed = true;
+        $(".item_selfreview_checklist .selfreview_checkbox").each(function () {
+            if (!$(this).is(":checked")) {
+  		swal("خطأ", "يجب الموافقة على كل البنود قبل البدأ في اضافة اعلانك الى كوت ستور","warning");
+                golive_is_allowed = false;
+                return false;
+            }
+        });
+        if (golive_is_allowed) {
+            document.getElementById('term-msg').style.display = 'none';
+  	    	swal("شكرا لك", "نحن على حرص شديد على تقديم خدمة أفضل لك لضمان جودة الاعلانات في كوت ستور و في المقابل نتمنى الالتزام بالقوانين التي قمت بالموافقة عليها ","success");
+
+        }
+    });
+</script>
+<!-- END switch_not_privmsg -->
 <!-- BEGIN switch_not_privmsg -->
 <table align="center" border="0" style="    padding: 10px;
     background-color: #FFF;
@@ -11,7 +348,7 @@
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);" width="90%">
 	<tr>
 		<td valign="top" width="147">
-		<img border="0" src="http://i18.servimg.com/u/f18/13/76/93/58/dialog10.png" width="128" height="128" align="right"></td>
+		<img border="0" src="https://i18.servimg.com/u/f18/13/76/93/58/dialog10.png" width="128" height="128" align="right"></td>
 		<td width="90%">
 		<p align="right"><b><font color="#FF0000">نصائح لجعل اعلانك 
 		اكثر جاذبية و استحسان راي الزوار و الاعضاء بخصوص ما تعلن عنه</font><font size="5">
