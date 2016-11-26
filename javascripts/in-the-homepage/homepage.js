@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
           a[25] = ["ficon25"];
           a[26] = ["ficon26"];
           a[21] = ["ficon21"];
-          a[1] = ["ficon55"];
+          a[55] = ["ficon55"];
          
           jQuery("a.forumtitle").each(function() {
             var b = jQuery(this).attr("href").match(/^\/f(\d+)-/)[1];
