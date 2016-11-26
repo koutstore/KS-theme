@@ -1,4 +1,4 @@
- /******************************
+/******************************
 ** ======= FUNCTIONS ======= **
 *******************************
 ** 00. group_color
@@ -88,415 +88,6 @@ $(function() {
 
 
 
-/* -- mintion search  -- */
-        !window.fa_mentionner && !/\/privmsg|\/profile\?mode=editprofile&page_profil=signature/.test(window.location.href) && $(function(){$(function(){
-          'SCEDITOR @HANDLE AUTO-SUGGEST';
-          'DEVELOPED BY ANGE TUTEUR';
-          'NO DISTRIBUTION WITHOUT CONSENT OF THE AUTHOR';
-          'ORIGIN : http://fmdesign.forumotion.com/t943-auto-suggest-mentions-as-you-type#19157';
-         
-          var container = $('.sceditor-container')[0],
-              text_editor = document.getElementById('text_editor_textarea'),
-              frame,
-              instance;
-         
-          if (container && text_editor) {
-         
-            frame = $('iframe', container);
-            instance = $(text_editor).sceditor('instance');
-         
-            window.fa_mentionner = {
-              suggest_delay : 100, // delay before suggestions show up (100ms)
-         
-              // language presets
-              lang : {
-                placeholder : 'Searching...',
-                not_found : 'User not found'
-              },
-         
-              // colors of the suggestion popup
-              color : {
-                      font : '#333',
-                hover_font : '#FFF',
-                error_font : '#F00',
-         
-                      background : '#FFF',
-                hover_background : '#69C',
-         
-                border : '#CCC',
-                shadow : 'rgba(0, 0, 0, 0.176)'
-              },
-         
-              // sceditor instance and rangeHelper
-              instance : instance,
-              rangeHelper : instance.getRangeHelper(),
-         
-              // cached nodes for listening and modifications
-              frame : frame[0],
-              body : frame.contents().find('body')[0],
-              textarea : $('textarea', container)[0],
-         
-              // faux textarea and suggestion list
-              faux_textarea : $('<div id="faux_text_editor" />')[0], // helps us mirror the cursor position in source mode
-              list : $('<div id="fa_mention_suggestions" style="position:absolute;" />')[0],
-         
-              // version specific selectors
-              selectors : $('.bodyline')[0] ? ['a.gen[href^="/u"]', '.avatar.mini a'] :
-                          document.getElementById('ipbwrapper') ? ['.membername', '.mini-avatar'] :
-                          null,
-         
-         
-              // adjusts the scroll position of the faux textarea so the caret stays in line
-              adjustScroll : function() {
-                fa_mentionner.faux_textarea.scrollTop = fa_mentionner.textarea.scrollTop;
-              },
-         
-         
-              // updates the content in the faux textarea
-              updateFauxTextarea : function(active, key) {
-                if (key == 16) { // 16 = SHIFT
-                  return; // return when specific keys are pressed
-                }
-         
-                // clear suggestion queue when suggestions aren't active
-                if (active != true) {
-                  fa_mentionner.clearSuggestions();
-                } else {
-                  return; // return when interactive keys are pressed while suggesting ; up, down, enter
-                }
-         
-                // use another method if in WYSIWYG mode
-                if (!fa_mentionner.instance.inSourceMode()) {
-                  key != 32 ? fa_mentionner.searchWYSIWYG() : fa_mentionner.clearSuggestions();
-                  return;
-                }
-         
-                var val = fa_mentionner.instance.val(),
-                    range = 0,
-                    selection,
-                    faux_caret,
-                    username;
-         
-                // get the position of the caret
-                if (document.selection) {
-                  selection = document.selection.createRange();
-                  selection.moveStart('character', -fa_mentionner.textarea.length);
-                  range = selection.text.length;
-                } else if (fa_mentionner.textarea.selectionStart || fa_mentionner.textarea.selectionStart == 0) {
-                  range = fa_mentionner.textarea.selectionStart;
-                }
-         
-                // set the position of the caret
-                val = val.slice(0, range) + '{FAUX_CARET}' + val.slice(range, val.length);
-         
-                // parse and sanitize the faux textarea content
-                $(fa_mentionner.faux_textarea).html(
-                  val.replace(/</g, '<')
-                    .replace(/>/g, '>')
-                    .replace(/@"(.*?)"|@(.*?)(?:\s|\r|\n|$)/g, function(M, $1, $2) {
-                      var lastChar = M.substr(-1),
-                          name = ($1 || $2 || '').replace(/\{FAUX_CARET\}|"/g, '');
-         
-                      return '<a href="#' + name + '">' + (/\s|\r|\n/.test(M) ? M.slice(0, M.length - 1) + '</a>' + lastChar : M + '</a>');
-                    })
-                    .replace(/\{FAUX_CARET\}/, '<span id="faux_caret" style="position:absolute;margin-left:-3px;">|</span>')
-                );
-         
-                faux_caret = document.getElementById('faux_caret');
-         
-                // mentions are parsed as <a>nchors, so when the faux caret is inside one we'll show some suggestions
-                if (faux_caret && faux_caret.parentNode.tagName == 'A') {
-                  fa_mentionner.value = val;
-         
-                  fa_mentionner.delay = window.setTimeout(function() {
-                    fa_mentionner.suggest(faux_caret.parentNode.href.replace(/.*?#(.*)/, '$1'), $(faux_caret).offset());
-                  }, fa_mentionner.suggest_delay);
-         
-                }
-         
-                fa_mentionner.adjustScroll();
-              },
-         
-         
-              // search for active mentions in wysiwyg mode
-              searchWYSIWYG : function() {
-                var selected = fa_mentionner.rangeHelper.cloneSelected(),
-                    mentions = selected.startContainer.data && selected.startContainer.data.match(/(@".*?")|(@.*?)(?:\s|\r|\n|$)/g),
-                    offset,
-                    offset_marker,
-                    hit,
-                    i;
-         
-                    console.log(mentions);
-         
-                if (mentions && mentions[0]) {
-         
-                  // clean up whitespace
-                  for (i in mentions) {
-                    mentions[i] = mentions[i].replace(/\s$/g, '');
-                  }
-         
-                  // search for the mention that's currently being modified
-                  for (i in mentions) {
-                    if (!fa_mentionner.wysiwyg_mentions || (mentions[i] != fa_mentionner.wysiwyg_mentions[i])) {
-                      hit = true;
-         
-                      fa_mentionner.delay = window.setTimeout(function() {
-                        fa_mentionner.rangeHelper.insertMarkers(); // insert markers to help get the caret offset
-         
-                        offset = $(fa_mentionner.frame).offset();
-                        offset_marker = $('#sceditor-end-marker', fa_mentionner.body).show().offset();
-         
-                        // add the marker offsets to the iframe offsets
-                        offset.left += offset_marker.left;
-                        offset.top += offset_marker.top - fa_mentionner.body.scrollTop;
-         
-                        fa_mentionner.suggest(mentions[i].slice(1).replace(/^"|"$/g, ''), offset, true);
-                        fa_mentionner.wysiwyg_active = mentions[i]; // save the active mention for later use in finish()
-                      }, fa_mentionner.suggest_delay);
-         
-                      break;
-                    }
-                  }
-         
-                  // hide the suggestion list if there's no newly modified mentions
-                  if (!hit) {
-                    fa_mentionner.list.style.display = 'none';
-                    fa_mentionner.focused = null;
-                  }
-         
-                  fa_mentionner.wysiwyg_mentions = mentions; // update the list of mentions
-         
-                }
-              },
-         
-              // suggest a list of users based on the passed username
-              suggest : function(username, offset, wysiwyg) {
-         
-                // insert the suggestion list to show that it's searching
-                fa_mentionner.list.innerHTML = '<span class="fam-info">' + fa_mentionner.lang.placeholder + '</span>';
-                $(fa_mentionner.list).css({
-                  left : offset.left + 'px',
-                  top : offset.top + 'px',
-                  display : 'block',
-                  overflowY : 'auto'
-                });
-         
-                document.body.appendChild(fa_mentionner.list);
-         
-                // send a query request to the memeberlist to find users who match the typed username
-                fa_mentionner.request = $.get('/memberlist?username=' + username, function(d) {
-                  fa_mentionner.request = null;
-         
-                  var suggestion = $(fa_mentionner.selectors ? fa_mentionner.selectors[0] : '.avatar-mini a', d),
-                      ava = fa_mentionner.selectors ? $(fa_mentionner.selectors[1], d) : null,
-                      i = 0,
-                      j = suggestion.length,
-                      name;
-         
-                  fa_mentionner.list.innerHTML = '';
-         
-                  if (j) {
-                    for (; i < j; i++) {
-                      name = $(suggestion[i]).text().replace(/^\s+|\s+$/g, '');
-         
-                      fa_mentionner.list.insertAdjacentHTML('beforeend',
-                        '<a href="javascript:fa_mentionner.finish(\'' + name.replace(/'/g, '\\\'') + '\', ' + wysiwyg + ');" class="fa_mention_suggestion">'+
-                          '<img class="fa_suggested_avatar" src="' + $(fa_mentionner.selectors ? ava[i] : suggestion[i]).find('img').attr('src') + '"/>'+
-                          '<span class="fa_suggested_name">' + name + '</span>'+
-                        '</a>'
-                      );
-                    }
-         
-                    // change overflowY property when it exceeds 7 suggestions -- prevents unsightly scroll bug
-                    fa_mentionner.list.style.overflowY = j > 7 ? 'scroll' : 'auto';
-         
-                    // update the focused suggestion and scroll it into view
-                    fa_mentionner.list.firstChild.className += ' fam-focus';
-                    fa_mentionner.focused = fa_mentionner.list.firstChild;
-                    fa_mentionner.scrollSuggestions();
-         
-                  } else {
-                    fa_mentionner.list.innerHTML = '<span class="fam-info" style="color:' + fa_mentionner.color.error_font + ';">' + fa_mentionner.lang.not_found + '</span>';
-                  }
-         
-                });
-              },
-         
-         
-              // kill the suggestion timeout while typing persists
-              clearSuggestions : function() {
-                if (fa_mentionner.delay) {
-                  window.clearTimeout(fa_mentionner.delay);
-                  fa_mentionner.delay = null;
-         
-                  fa_mentionner.list.style.display = 'none';
-                  fa_mentionner.focused = null;
-                }
-         
-                if (fa_mentionner.request) {
-                  fa_mentionner.request.abort();
-                  fa_mentionner.request = null;
-                }
-              },
-         
-         
-              // finish the username
-              finish : function(username, wysiwyg) {
-                var mention, index, i;
-         
-                // hide and clear suggestions
-                fa_mentionner.clearSuggestions();
-                fa_mentionner.focused = null;
-                fa_mentionner.list.style.display = 'none';
-         
-                if (!wysiwyg) {
-                  fa_mentionner.value = fa_mentionner.value.replace(/(?:@".[^"]*?\{FAUX_CARET\}.*?"|@\{FAUX_CARET\}.*?(\s|\n|\r|$)|@.[^"\s]*?\{FAUX_CARET\}.*?(\s|\n|\r|$))/, function(M, $1, $2) {
-                    mention = '@"' + username + '"';
-                    return '{MENTION_POSITION}' + ( $1 ? $1 : $2 ? $2 : '' );
-                  });
-         
-                  // get the index where the mention should be
-                  index = fa_mentionner.value.indexOf('{MENTION_POSITION}');
-                  fa_mentionner.value = fa_mentionner.value.replace('{MENTION_POSITION}', '');
-         
-                  // save current scroll position for application after the value has been updated
-                  fa_mentionner.scrollIndex = fa_mentionner.textarea.scrollTop;
-         
-                  // update the textarea with the completed mention
-                  fa_mentionner.instance.val('');
-                  fa_mentionner.instance.insert(fa_mentionner.value.slice(0, index) + mention, fa_mentionner.value.slice(index, fa_mentionner.value.length));
-         
-                  // restore the scroll position for the textareas
-                  fa_mentionner.textarea.scrollTop = fa_mentionner.scrollIndex;
-                  fa_mentionner.adjustScroll();
-         
-                  // update the fake textarea
-                  fa_mentionner.updateFauxTextarea();
-         
-                } else {
-                  // save the caret range in WYSIWYG so we can restore it after replacing the HTML
-                  fa_mentionner.rangeHelper.saveRange();
-                  fa_mentionner.body.innerHTML = fa_mentionner.body.innerHTML.replace(new RegExp(fa_mentionner.wysiwyg_active.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + '(<span.*?id="sceditor-end-marker".*?>)'), '@"' + username + '"$1');
-                  fa_mentionner.body.focus();
-                  fa_mentionner.rangeHelper.restoreRange();
-         
-                  // update the wysiwyg mention array so no new suggestions appear
-                  for (i in fa_mentionner.wysiwyg_mentions) {
-                    if (fa_mentionner.wysiwyg_mentions[i] == fa_mentionner.wysiwyg_active) {
-                      fa_mentionner.wysiwyg_mentions[i] = '@"' + username + '"';
-                      break;
-                    }
-                  }
-                }
-              },
-         
-         
-              // scroll the selected suggestion into view
-              scrollSuggestions : function() {
-                $(fa_mentionner.list).scrollTop(
-                  (
-                    $(fa_mentionner.focused).offset().top -
-                    $(fa_mentionner.list).offset().top +
-                    $(fa_mentionner.list).scrollTop()
-                  ) -
-         
-                  (26 * 3) // 26 = the height of the suggestions, so display 3 suggestions above while scrolling
-                );
-              }
-            };
-         
-            // get computed styles for the textarea and apply them to the faux textarea
-            for (var css = window.getComputedStyle(fa_mentionner.textarea, null), i = 0, j = css.length, str = ''; i < j; i++) {
-              str += css[i] + ':'  + css.getPropertyValue(css[i]) + ';';
-            }
-         
-            // add styles to the head
-            $('head').append('<style type="text/css">'+
-              '#faux_text_editor {' + str + '}'+
-              '#faux_text_editor { position:absolute; left:0; bottom:0; z-index:-1; visibility:hidden; display:block; overflow-y:auto; }'+
-              '#fa_mention_suggestions { color:' + fa_mentionner.color.font + '; font-size:10px; font-family:arial, verdana, sans-serif; background:' + fa_mentionner.color.background + '; border:1px solid ' + fa_mentionner.color.border + '; margin-top:20px; z-index:999; max-height:182px; overflow-x:hidden; box-shadow:0 6px 12px ' + fa_mentionner.color.shadow + '; }'+
-              'a.fa_mention_suggestion, .fam-info { color:' + fa_mentionner.color.font + '; height:26px; line-height:26px; padding:0 3px; display:block; white-space:nowrap; cursor:pointer; }'+
-              'a.fa_mention_suggestion.fam-focus { color:' + fa_mentionner.color.hover_font + '; background:' + fa_mentionner.color.hover_background + '; }'+
-              '.fa_suggested_avatar { height:20px; width:20px; vertical-align:middle; margin-right:3px; }'+
-            '</style>');
-         
-            // insert faux textarea into document
-            fa_mentionner.textarea.parentNode.insertBefore(fa_mentionner.faux_textarea, fa_mentionner.textarea);
-         
-            // apply event handlers
-            fa_mentionner.textarea.onclick = fa_mentionner.updateFauxTextarea;
-            fa_mentionner.textarea.onscroll = fa_mentionner.adjustScroll;
-         
-            // update the faux textarea on keyup
-            fa_mentionner.instance.keyUp(function(e) {
-              if (fa_mentionner.focused && e && (e.keyCode == 13 || e.keyCode == 38 || e.keyCode == 40)) {
-                fa_mentionner.updateFauxTextarea(true, e.keyCode);
-                return false;
-              } else {
-                fa_mentionner.updateFauxTextarea(false, e.keyCode);
-              }
-            });
-         
-            // key events for the suggested mentions
-            $([document, fa_mentionner.body]).on('keydown', function(e) {
-              var that = e.target;
-         
-              if (fa_mentionner.focused && e && e.keyCode && (that.tagName == 'TEXTAREA' || that.tagName == 'BODY')) {
-         
-                // move selection down
-                if (e.keyCode == 40) {
-                  var next = fa_mentionner.focused.nextSibling;
-         
-                  if (next) {
-                    $(fa_mentionner.focused).removeClass('fam-focus');
-                    next.className += ' fam-focus';
-                    fa_mentionner.focused = next;
-         
-                    fa_mentionner.scrollSuggestions();
-                  }
-         
-                  return false;
-                }
-         
-                // move selection up
-                if (e.keyCode == 38) {
-                  var prev = fa_mentionner.focused.previousSibling;
-         
-                  if (prev) {
-                    $(fa_mentionner.focused).removeClass('fam-focus');
-                    prev.className += ' fam-focus';
-                    fa_mentionner.focused = prev;
-         
-                    fa_mentionner.scrollSuggestions();
-                  }
-         
-                  return false;
-                }
-         
-                // apply selection
-                if (e.keyCode == 13) {
-                  fa_mentionner.focused.click();
-                  return false;
-                }
-         
-              }
-            });
-         
-            // update focused suggestion on hover
-            $(document).on('mouseover', function(e) {
-              var that = e.target;
-         
-              if (/fa_mention_suggestion/.test(that.className)) {
-                $(fa_mentionner.focused).removeClass('fam-focus');
-                that.className += ' fam-focus';
-                fa_mentionner.focused = that;
-              }
-            });
-          }
-        })});
-
-
 /* -- mintion avatar  -- */
 
         (function() {
@@ -556,29 +147,8 @@ $(function() {
           });
         }());
 
-
-/* -- guest replay -- */
-        $(function() {
-          var reply = $('.i_reply').parent()[0];
-         
-          if (!_userdata.session_logged_in && reply) {
-            $.get(reply.href, function(d) {
-              var form = $('form[name="post"]', d);
-         
-              form.find('#smiley-box').hide();
-              form.find('#message-box').css({
-                width : '100%',
-                textAlign : 'center'
-              });
-         
-              $('#logged_out_reply').hide().after(form);
-            });
-          }
-        });
-
-
 /* ajax auto see new post */
-/*
+
 $(function() {
           window.AJAX_TOPIC = {
             poll_time : 3000,
@@ -598,7 +168,7 @@ $(function() {
          
           AJAX_TOPIC.poll = window.setInterval(AJAX_TOPIC.get, AJAX_TOPIC.poll_time);
           'par ange tuteur';
-        }); */
+        }); 
 
 
 /* -- solved button  -- */
@@ -607,7 +177,7 @@ $(function() {
          
             icon : {
               id : 8,
-              image : 'http://i18.servimg.com/u/f18/13/76/93/58/ks_sol10.png'
+              image : 'https://i18.servimg.com/u/f18/13/76/93/58/ks_sol10.png'
             },
          
          lang: {
@@ -797,7 +367,7 @@ $(function() {
               jQuery('.sceditor-resize-cover').hide();
            }).fail(function() {
               oFE_msgID.html(sFE_oldMsg);
-              alert('تنبيه!\n\n حدث خطأ في ارسال طلب التعديل , يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى !');
+              swal("حدث خطأ في ارسال طلب التعديل !", "يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى","warning");
            });
            jQuery('html,body').animate({
               scrollTop: jQuery('#p' + post_ID).offset().top
@@ -851,7 +421,8 @@ $(function() {
               /* */
            }).fail(function() {
               oFE_msgID.html(sFE_oldMsg);
-              alert('تنبيه !\n\n حدث خطأ اثناء حفظ التعديل , يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى');
+              swal("خطأ", "حدث خطأ اثناء حفظ التعديل , يرجى الانتظار 10 ثواني و اعادة المحاولة مرة اخرى","warning");
+               
            });
            jQuery('html,body').animate({
               scrollTop: jQuery('#p' + post_ID).offset().top
@@ -957,13 +528,13 @@ $(function() {
                           if (FFinPosts.aFF_list.indexOf(FFinPosts.sUser_name) == -1) {
                              FFinPosts.vTemp.append(
                                 '<br><a title="اضافة الى الاصدقاء" class="profile-icon" href="/profile?friend=' + encodeURIComponent(FFinPosts.sUser_name) + '&mode=editprofile&page_profil=friendsfoes">' +
-                                '   <img alt="Add As Friend" src="http://i97.servimg.com/u/f97/19/14/82/76/add-2410.png" >' +
+                                '   <img alt="Add As Friend" src="https://i97.servimg.com/u/f97/19/14/82/76/add-2410.png" >' +
                                 '</a>'
                              )
                           } else {
                              FFinPosts.vTemp.append(
                                 '<br><a title="حظر هذا العضو" class="profile-icon" href="/profile?foe=' + encodeURIComponent(FFinPosts.sUser_name) + '&mode=editprofile&page_profil=friendsfoes">' +
-                                '   <img alt="Add To Foes" src="http://i97.servimg.com/u/f97/19/14/82/76/cancel10.png" >' +
+                                '   <img alt="Add To Foes" src="https://i97.servimg.com/u/f97/19/14/82/76/cancel10.png" >' +
                                 '</a>'
                              )
                           }
@@ -1196,11 +767,11 @@ $(function() {
         $.post('/post', $('#quick_reply').serialize() + '&post=Send', function(t) {
          
         if(t.indexOf("Flood") != -1){
-        alert("خطأ !\nهذا الموقع يتطلب بأن تنتظر 10 ثواني بين كل عملية وأخرى");
+        swal("خطأ", "هذا الموقع يتطلب بأن تنتظر 10 ثواني بين كل عملية وأخرى","warning");
         $(".lreply").fadeOut(300);
         }
         if(t.indexOf("A new") != -1){
-        alert("خطأ !\nهناك شخص قام بالتعليق على المنشور في نفس الوقت\nيجب تحديث الصفحة و المحاولة مرةاخرى.\nملاحظة : تأكد من حفظك للمحتوى في صندوق المحرر قبل تحديث الصفحة ");
+        swal( "هناك شخص قام بالتعليق على المنشور في نفس الوقت","يجب تحديث الصفحة و المحاولة مرة اخرى ، ملاحظة : تأكد من حفظك للمحتوى في صندوق المحرر قبل تحديث الصفحة","warning");
         $(".lreply").fadeOut(300);
         }
         if($(t).find('.content-block a[href*="/viewtopic"]:first').attr('href').length >1) {
@@ -1218,7 +789,7 @@ $(function() {
         });
         }
         else {
-        alert("خطأ\nعدد حروف المحتوى الذي أدخلته قصير جداً ،\n يجب أن تتجاوز 10 حروف.");
+  		swal("خطأ", "عدد حروف المحتوى الذي أدخلته قصير جداً ، يجب أن يتجاوز ردك 10 حروف","warning");
         }
         });
         });
@@ -1243,3 +814,68 @@ $(function() {
   }
 
 })();
+
+
+/* guest reply */
+
+$(function () {
+         
+            if (_userdata.session_logged_in || document.getElementById('quick_reply')) return;
+         
+            var reply = $('.i_reply')[0];
+         
+            if (reply) reply = reply.parentNode;
+            else return;
+              window.plugins = '';
+              window.palette = 0;
+              window.illiweb = 'http://illiweb.com/';
+              window.locale = 'ar';
+              window.height = '250';
+              window.plugin = 'bbcode';
+              window.toolbar = 'bold,italic,underline,strike|left,center,right,justify|bulletlist,orderedlist,horizontalrule|quote,code,faspoiler,fahide,table|servimg,image,link,youtube|date,headers,size,emoticon,color,font,removeformat|subscript,superscript|fascroll,faupdown,farand,faroll|pastetext,source';
+              window.cssFile = 'http://illiweb.com/rs3/46/frm/SCEditor/minified/jquery.sceditor.default.min.css';
+              window.isRtl = 0;
+              window.dice = [];
+              window.bSourceMode = false;
+              window.emoticonsEnabled = 1;
+              window.smileys =  {};
+              window.iframeSrc = '/smilies.forum?mode=smilies_frame&t=1440581833';
+              window.illiwebDomain = 'http://illiweb.com/';
+              window.INTRANET = 0;
+         
+            $.get(reply.href, function (d) {
+                var quick_reply = document.createElement('FORM'),
+                    area = $('#text_editor_textarea', d)[0],
+                    data = $('.submit-buttons', d)[0],
+                    anchor = document.anchors.quickreply,
+                    scripts, i, j, n;
+                quick_reply.id = 'quick_reply';
+                quick_reply.action = '/post';
+                quick_reply.method = 'post';
+                quick_reply.name = 'post';
+                quick_reply.enctype = 'multipart/form-data';
+                quick_reply.innerHTML = '<div style="width: 50%; clear: both; margin-left: auto; margin-right: auto; text-align: center;"><div style="padding: 8px 24px;background: #e6e6e6;border-radius: 8px;margin: 8px;"><span>اسم المستخدم :</span><input class="inputbox" type="text" name="username" maxlength="25" value=""></div></div><link rel="stylesheet" href="http://illiweb.com/rs3/46/frm/SCEditor/src/themes/fa.default.min.css" type="text/css" media="all" /></div>';
+         
+                area && quick_reply.firstChild.appendChild(area);
+                data && quick_reply.firstChild.appendChild(data);
+         
+                anchor.parentNode.insertBefore(quick_reply, anchor.nextSibling);
+         
+                scripts = [
+        'http://illiweb.com/rs3/46/frm/jquery/cookie/jquery.cookie.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/jquery.sceditor.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/plugins/bbcode.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/sceditor-commands.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/sceditor-commands-bbcode.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/sceditor-custom-bbcode.js',
+        'http://illiweb.com/rs3/46/frm/SCEditor/src/instance-sceditor.js'
+        ];
+         
+                for (i = 0, j = scripts.length; i < j; i++) {
+                    n = document.createElement('SCRIPT');
+                    n.type = 'text/javascript';
+                    n.src = scripts[i];
+                    quick_reply.appendChild(n);
+                }
+            });
+         }());
