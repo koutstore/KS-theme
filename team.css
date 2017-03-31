@@ -1,4 +1,201 @@
 
+  /*** footer section color ***/
+    
+    
+         .flipcard-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+.flipcard {
+  position: relative;
+  min-height: 312px;
+  width: 100%;
+  -webkit-perspective: 700px;
+          perspective: 700px;
+  z-index: 1;
+}
+.flipcard:hover {
+  z-index: 2;
+}
+.flipcard-link {
+  height: auto;
+  width: auto;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.flipcard-link:hover .flipcard-front.flipcard-top-wrapper,
+.flipcard-link:focus .flipcard-front.flipcard-top-wrapper {
+  -webkit-animation: none;
+          animation: none;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  -webkit-transform: rotateX(-45deg);
+          transform: rotateX(-45deg);
+}
+.flipcard-link:hover .flipcard-front.flipcard-top-wrapper:after,
+.flipcard-link:focus .flipcard-front.flipcard-top-wrapper:after {
+  box-shadow: inset 0px -200px 300px -121px rgba(0, 0, 0, 0.3);
+}
+.flipcard-front {
+  z-index: 2;
+}
+.ie9 .flipcard-front {
+  display: none;
+}
+.flipcard-back {
+  z-index: 1;
+  width: 100%;
+  height: 312px;
+  left: 0;
+}
+.flipcard-top-wrapper,
+.flipcard-bottom-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  overflow: hidden;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+  z-index: 2;
+}
+.flipcard-top,
+.flipcard-bottom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.flipcard-top .card-symbol svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -132px;
+}
+.flipcard-front.flipcard-top-wrapper:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0;
+  -webkit-transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
+}
+.flipcard-bottom-wrapper {
+  top: 50%;
+}
+.flipcard-bottom-wrapper .flipcard-bottom {
+  margin-top: -156px;
+}
+.flipcard-back.flipcard-top-wrapper,
+.flipcard-back.flipcard-bottom-wrapper {
+  z-index: 1;
+}
+.flipcard-back.flipcard-bottom-wrapper {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  z-index: 3;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.flipcard.is-open .flipcard-link .flipcard-front.flipcard-top-wrapper {
+  -webkit-transform: rotateX(-180deg);
+          transform: rotateX(-180deg);
+}
+.flipcard.is-open .flipcard-back.flipcard-bottom-wrapper {
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+}
+.flipcard .flipboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.flipcard .flipboard-list .flipboard-item {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  height: 44px;
+}
+.flipcard .flipboard-list .flipboard-item.flipboard-item-close {
+  border: 0 none;
+  height: 48px;
+}
+.flipcard .flipboard-list .flipboard-close {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0 none;
+  background: transparent;
+  padding: 0 21px;
+  vertical-align: middle;
+  color: #fff;
+  display: block;
+  font-weight: 700;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  text-transform: uppercase;
+}
+.flipcard .flipboard-list .flipboard-close:focus {
+  outline: none;
+}
+.is-keyboarduser .flipcard .flipboard-list .flipboard-close:focus {
+  outline: 2px dotted #000;
+  outline-offset: 0.5rem;
+}
+.flipcard .flipboard-list .flipboard-close .flipboard-close-icon {
+  float: right;
+}
+.flipcard .flipboard-list .flipboard-close .flipboard-close-icon svg {
+  height: 18px;
+  width: auto;
+}
+.flipcard .flipboard-list .flipboard-close .flipboard-close-icon svg .icons-background {
+  fill: #fff;
+}
+.flipcard .flipboard-list .flipboard-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 12px 21px;
+  color: #fff;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+ 
+.presentation {
+  float: left;
+  width: 30%;
+  margin: 1.66667%;
+}
+
+
         /*! GEL - v[Version] */
         /*! Colors v1.0.0 WBC*/
         
