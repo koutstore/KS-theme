@@ -8493,9 +8493,8 @@ ul {
 .team-container {
   max-width: 1170px;
   width: 100%;
-  margin: 100px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  margin: 0px auto;
+   box-sizing: border-box;
   -webkit-transform-origin: top center;
           transform-origin: top center;
   -webkit-transform: scale(0.8);
