@@ -8495,8 +8495,4 @@ ul {
   width: 100%;
   margin: 0px auto;
    box-sizing: border-box;
-  -webkit-transform-origin: top center;
-          transform-origin: top center;
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
 }
