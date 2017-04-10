@@ -8383,7 +8383,7 @@ animation: fa-spin 9s infinite linear;
 }
 
 #next {
-  background-image: url("https://i58.servimg.com/u/f58/19/52/02/20/arrow-11.png");
+  background-image: url("http://arielbeninca.com/Storage/next.png");
   background-repeat: no-repeat;
   width: 120px;
   height: 120px;
@@ -8399,7 +8399,7 @@ animation: fa-spin 9s infinite linear;
 }
 
 #prev {
-  background-image: url("https://i58.servimg.com/u/f58/19/52/02/20/arrow-10.png");
+  background-image: url("http://arielbeninca.com/Storage/prev.png");
   background-repeat: no-repeat;
   width: 120px;
   height: 120px;
