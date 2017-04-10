@@ -8496,3 +8496,137 @@ ul {
   margin: 0px auto;
    box-sizing: border-box;
 }
+
+
+
+
+
+    @import url('https://fonts.googleapis.com/css?family=Reem+Kufi');
+    .team-bar {
+        width: 100%;
+        height: 224px;
+background: #FFC911 url(https://i58.servimg.com/u/f58/19/52/02/20/patter10.png);
+    }
+    
+    .bar1 {
+        float: right;
+        background: white;
+        width: 217px;
+        border-radius: 999px;
+        margin-right: 12%;
+        padding: 9px;
+   -webkit-animation: fa-spin 9s infinite linear;
+animation: fa-spin 9s infinite linear;
+    }
+    
+    .bar2 {
+        text-align: right;
+        padding: 30px;
+        float: right;
+   font-size: 22px;
+    font-family: 'Reem Kufi', sans-serif;
+    }
+   .barmom {
+    margin-right: 53px;
+    width: 83%;
+}
+   
+   .bar3 {
+    text-align: right;
+    padding-top: 95px;
+    padding-right: 11px;
+}
+
+
+
+/** slider **/
+
+
+
+
+.imgslide {
+  height: 100vh !important;
+  overflow: hidden;
+}
+
+#photos {
+  position: relative;
+  width: auto;
+  height: 100%;
+  clear: both;
+  margin: 0px auto;
+}
+#photos img {
+  position: absolute;
+  z-index: 0;
+  height: 100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#photos img.previous {
+  z-index: 1;
+}
+#photos img.current {
+  z-index: 2;
+}
+
+#dots {
+  padding: 0;
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+#next {
+  background-image: url("http://arielbeninca.com/Storage/next.png");
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  float: right;
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  right: 100px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+#prev {
+  background-image: url("http://arielbeninca.com/Storage/prev.png");
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  z-index: 5;
+  position: absolute;
+  float: left;
+  top: 50%;
+  left: 100px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+#dots li {
+  opacity: 0.8;
+  background-image: url("http://arielbeninca.com/Storage/dot.png");
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 10px;
+}
+#dots li:hover, #dots li.selected {
+  background-image: url("http://arielbeninca.com/Storage/dotfill.png");
+  width: 15px;
+  height: 15px;
+}
