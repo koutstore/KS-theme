@@ -8167,11 +8167,11 @@
       flex-basis: 50%;
 }
 .at-grid[data-column="3"] .at-column {
-  width: 33.33333%;
-  max-width: 33.33333%;
-  min-width: 33.33333%;
-  -ms-flex-preferred-size: 33.33333%;
-      flex-basis: 33.33333%;
+  width: 25%;
+  max-width: 25%;
+  min-width: 25%;
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
 }
 .at-grid[data-column="4"] .at-column {
   width: 25%;
