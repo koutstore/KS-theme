@@ -8480,12 +8480,13 @@ nav {
 }
 
 nav ul { 
-  list-style-type: none;
-  margin: 0 auto;
-  padding-left:160;
-  text-align:left;
-  width: 960px; 
-  max-width: 100%;
+list-style-type: none;
+margin: 0 auto;
+padding-left: 262px;
+text-align: left;
+width: 916px;
+max-width: 100%;
+float: left;
 }
 nav ul li { 
   display: inline-block; 
@@ -8512,3 +8513,83 @@ body {
 }
 
 
+/* vistor button */
+.vistor-button {
+    float: right;
+    padding-right: 35px;
+    margin-top: 11px;
+}
+
+
+
+ 
+.vistor-button .button {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 60px;
+  line-height: 35px;
+  padding: 0 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  background: #8c96a4;
+  border: 1px solid;
+  border-color: #8c8f9a #78828b #6e6e6e;
+  background-image: -webkit-linear-gradient(top, #a9b5c4, #848d9b 90%);
+  background-image: -moz-linear-gradient(top, #a9b5c4, #848d9b 90%);
+  background-image: -o-linear-gradient(top, #a9b5c4, #848d9b 90%);
+  background-image: linear-gradient(to bottom, #a9b5c4, #848d9b 90%);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), inset 0 0 1px 1px rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), inset 0 0 1px 1px rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.vistor-button .button:first-child {
+  border-radius: 0px 4px 4px 0px;
+}
+.vistor-button .button:last-child {
+  border-radius:4px 0px 0px 4px;
+}
+.vistor-button .button:only-child {
+  border-radius: 3px;
+}
+.vistor-button .button + .button {
+  position: relative;
+  margin-left: -1px;
+}
+.vistor-button .button:active {
+  background: #848d9b;
+  border-color: #6e6e6e #78828b #78828b;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+}
+    
+  .vistor-button   .button:active {
+  background: #848d9b;
+  border-color: #6e6e6e #78828b #78828b;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.vistor-button .button-blue {
+  background: #6990d1;
+  border-color: #687ebb #5f74a6 #4e6198;
+  background-image: -webkit-linear-gradient(top, #8eb7e0, #5f85cc 90%);
+  background-image: -moz-linear-gradient(top, #8eb7e0, #5f85cc 90%);
+  background-image: -o-linear-gradient(top, #8eb7e0, #5f85cc 90%);
+  background-image: linear-gradient(to bottom, #8eb7e0, #5f85cc 90%);
+}
+.vistor-button .button-blue:active {
+  background: #5f85cc;
+  border-color: #4e6198 #5f74a6 #5f74a6;
+}
+
+
+ .vistor-button   .button:hover {
+     box-shadow: 0 0 0;
+    color: white;
+    text-decoration: none;
+} 
+    
