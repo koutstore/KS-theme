@@ -8320,8 +8320,8 @@ animation: fa-spin 9s infinite linear;
     
     .bar2 {
         text-align: right;
-        padding: 30px;
-        float: right;
+padding-top: 30px;
+      float: right;
    font-size: 22px;
     font-family: 'Reem Kufi', sans-serif;
     }
