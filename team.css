@@ -8305,6 +8305,7 @@
         width: 100%;
         height: 224px;
 background: #FFC911 url(https://i58.servimg.com/u/f58/19/52/02/20/patter10.png);
+	    margin-top: 28px;
     }
     
     .bar1 {
@@ -8343,7 +8344,7 @@ padding-top: 30px;
 
        #masterhead {
 	  padding-top: 20px;
-	  padding-bottom: 124px;
+	  padding-bottom: 201px;
   	margin-bottom: -52px;
 }
 
