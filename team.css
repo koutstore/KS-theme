@@ -8539,12 +8539,12 @@ padding-top: 30px;
 	}
 
 	.carousel-inner > .item {
-		height: 500px;
+		height: 665px;
 	}
 
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
-		height: 500px;
+		height: 665px;
 	}
 
   	.carousel-control .glyphicon-chevron-left,
