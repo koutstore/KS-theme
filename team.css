@@ -100,6 +100,16 @@
   -webkit-transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
 }
+
+
+.module-advert, #main-content iframe{
+  display: none !important;
+}
+
+div.centerer.footer-links{
+  display: none !important;
+}
+
 .flipcard-bottom-wrapper {
   top: 50%;
 }
