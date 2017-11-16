@@ -7,6 +7,14 @@
     position: relative;
 }
 
+.topic1 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: scroll;
+    top: 60px;
+    position: relative;
+}
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }
