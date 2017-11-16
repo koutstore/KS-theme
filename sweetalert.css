@@ -3,16 +3,16 @@
     width: 100%;
     white-space: nowrap;
     overflow: scroll;
-    bottom: 60px;
-    position: relative;
+    bottom: 360px;
+    position: absolute;
 }
 
 .topic1 {
     width: 100%;
     white-space: nowrap;
     overflow: scroll;
-    top: 60px;
-    position: relative;
+    top: 80px;
+    position: absolute;
 }
 
 body.stop-scrolling {
