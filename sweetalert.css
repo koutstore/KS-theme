@@ -1,3 +1,12 @@
+  /* alertks */
+p {
+    width: 100%;
+    white-space: nowrap;
+    overflow: scroll;
+    bottom: 60px;
+    position: relative;
+}
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }
