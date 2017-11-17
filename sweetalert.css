@@ -15,6 +15,16 @@
     position: absolute;
 }
 
+ .keyw{
+    width: 134px;
+    white-space: nowrap;
+    overflow: scroll;
+    position: absolute;
+    height: 40px;
+    font-size: 16px;
+    left: 204px;
+}
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }
