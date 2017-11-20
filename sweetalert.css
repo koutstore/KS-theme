@@ -1,6 +1,6 @@
   /* alertks */
 .par1 {
-    width: 100%;
+    width: 80%;
     white-space: nowrap;
     overflow: scroll;
     bottom: 960px;
@@ -8,21 +8,22 @@
 }
 
 .topic1 {
-    width: 100%;
+    width: 80%;
     white-space: nowrap;
     overflow: scroll;
     top: -9999px;
     position: absolute;
 }
 
- .keyw{
+.keyw {
     width: 134px;
     white-space: nowrap;
     overflow: scroll;
     position: absolute;
     height: 40px;
     font-size: 16px;
-    left: 204px;
+    bottom: 1000px;
+    float: left;
 }
 
 body.stop-scrolling {
